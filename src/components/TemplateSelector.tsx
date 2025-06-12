@@ -2,14 +2,25 @@
 
 import React, { useState } from 'react';
 import { useCV } from '@/context/CVContext';
+import { usePremium } from '@/context/PremiumContext';
 import { AVAILABLE_TEMPLATES, TemplateType } from '@/types/template';
 import TemplatePreview from './TemplatePreview';
 
 export default function TemplateSelector() {
   const { selectedTemplate, setTemplate } = useCV();
+  const { isPremium, setShowUpgradeModal } = usePremium();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleTemplateSelect = (templateId: TemplateType) => {
+    const template = AVAILABLE_TEMPLATES.find(t => t.id === templateId);
+    
+    // Check if template is premium and user doesn't have premium access
+    if (template?.isPremium && !isPremium) {
+      setShowUpgradeModal(true);
+      setIsOpen(false);
+      return;
+    }
+    
     setTemplate(templateId);
     setIsOpen(false);
   };
@@ -55,15 +66,22 @@ export default function TemplateSelector() {
                   className={`flex items-start gap-4 p-3 rounded-lg border-2 transition-all text-left hover:shadow-md ${
                     selectedTemplate === template.id
                       ? 'border-blue-500 bg-blue-50 shadow-md'
+                      : template.isPremium && !isPremium
+                      ? 'border-gray-200 hover:border-orange-300 hover:bg-orange-50'
                       : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                  }`}
+                  } ${template.isPremium && !isPremium ? 'relative' : ''}`}
                 >
                   {/* Template Preview */}
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 relative">
                     <TemplatePreview 
                       templateType={template.id} 
                       className="w-16 h-20 border border-gray-200 rounded shadow-sm"
                     />
+                    {template.isPremium && !isPremium && (
+                      <div className="absolute inset-0 bg-black bg-opacity-40 rounded flex items-center justify-center">
+                        <span className="text-white text-xs">🔒</span>
+                      </div>
+                    )}
                   </div>
                   
                   {/* Template Info */}

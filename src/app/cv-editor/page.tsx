@@ -3,6 +3,8 @@ import CVPreview from '@/components/CVPreview';
 import SaveStatusIndicator from '@/components/SaveStatusIndicator';
 import DataManagement from '@/components/DataManagement';
 import TemplateSelector from '@/components/TemplateSelector';
+import PremiumModal from '@/components/PremiumModal';
+import PremiumBadge from '@/components/PremiumBadge';
 import Link from 'next/link';
 
 export default function CVEditorPage() {
@@ -12,10 +14,11 @@ export default function CVEditorPage() {
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 lg:mb-8 gap-4 sm:gap-0">
           <div className="flex-1">
-            <div className="flex items-center gap-4 mb-2">
-              <h1 className="text-2xl lg:text-3xl font-bold text-gray-800">Resume Builder</h1>
-              <SaveStatusIndicator />
-            </div>
+                      <div className="flex items-center gap-4 mb-2">
+            <h1 className="text-2xl lg:text-3xl font-bold text-gray-800">Resume Builder</h1>
+            <SaveStatusIndicator />
+            <PremiumBadge />
+          </div>
             <p className="text-gray-600 text-sm lg:text-base">Create your professional resume</p>
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -44,6 +47,9 @@ export default function CVEditorPage() {
           </div>
         </div>
       </div>
+      
+      {/* Premium Modal */}
+      <PremiumModal />
     </div>
   );
 } 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import TemplatePreview from '@/components/TemplatePreview';
+import PremiumModal from '@/components/PremiumModal';
 import { AVAILABLE_TEMPLATES } from '@/types/template';
 
 export default function HomePage() {
@@ -117,6 +118,9 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+      
+      {/* Premium Modal */}
+      <PremiumModal />
     </div>
   );
 }
