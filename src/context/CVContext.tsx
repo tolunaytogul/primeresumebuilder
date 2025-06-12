@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { CVData, PersonalInfo, Experience, Education, Skill } from '@/types/cv';
+import { TemplateType } from '@/types/template';
 import { useAutoSave } from '@/hooks/useAutoSave';
 
 // İlk durum
@@ -32,7 +33,8 @@ type CVAction =
   | { type: 'UPDATE_SKILL'; payload: { id: string; data: Partial<Skill> } }
   | { type: 'DELETE_SKILL'; payload: string }
   | { type: 'RESET_CV' }
-  | { type: 'LOAD_SAVED_DATA'; payload: CVData };
+  | { type: 'LOAD_SAVED_DATA'; payload: CVData }
+  | { type: 'SET_TEMPLATE'; payload: TemplateType };
 
 // Reducer
 function cvReducer(state: CVData, action: CVAction): CVData {
@@ -123,6 +125,7 @@ function cvReducer(state: CVData, action: CVAction): CVData {
 // Context tiplerini tanımla
 interface CVContextType {
   cvData: CVData;
+  selectedTemplate: TemplateType;
   dispatch: React.Dispatch<CVAction>;
   updatePersonalInfo: (data: Partial<PersonalInfo>) => void;
   addExperience: (experience: Experience) => void;
@@ -137,6 +140,7 @@ interface CVContextType {
   resetCV: () => void;
   loadSavedData: () => void;
   clearSavedData: () => void;
+  setTemplate: (template: TemplateType) => void;
   saveStatus: 'idle' | 'saving' | 'saved' | 'error';
   lastSaved: Date | null;
   hasSavedData: () => boolean;
@@ -148,6 +152,7 @@ const CVContext = createContext<CVContextType | undefined>(undefined);
 // Provider bileşeni
 export function CVProvider({ children }: { children: ReactNode }) {
   const [cvData, dispatch] = useReducer(cvReducer, initialState);
+  const [selectedTemplate, setSelectedTemplate] = React.useState<TemplateType>('modern');
   const { saveStatus, lastSaved, loadSavedData: loadFromStorage, clearSavedData: clearFromStorage, hasSavedData } = useAutoSave(cvData);
 
   // Load saved data on mount
@@ -156,7 +161,18 @@ export function CVProvider({ children }: { children: ReactNode }) {
     if (savedData) {
       dispatch({ type: 'LOAD_SAVED_DATA', payload: savedData });
     }
+    
+    // Load saved template preference
+    const savedTemplate = localStorage.getItem('primeresumebuilder_template');
+    if (savedTemplate && ['modern', 'classic', 'creative', 'minimal'].includes(savedTemplate)) {
+      setSelectedTemplate(savedTemplate as TemplateType);
+    }
   }, [loadFromStorage]);
+
+  // Save template preference when changed
+  useEffect(() => {
+    localStorage.setItem('primeresumebuilder_template', selectedTemplate);
+  }, [selectedTemplate]);
 
   // Helper fonksiyonlar
   const updatePersonalInfo = (data: Partial<PersonalInfo>) => {
@@ -216,8 +232,13 @@ export function CVProvider({ children }: { children: ReactNode }) {
     dispatch({ type: 'RESET_CV' });
   };
 
+  const setTemplate = (template: TemplateType) => {
+    setSelectedTemplate(template);
+  };
+
   const value: CVContextType = {
     cvData,
+    selectedTemplate,
     dispatch,
     updatePersonalInfo,
     addExperience,
@@ -232,6 +253,7 @@ export function CVProvider({ children }: { children: ReactNode }) {
     resetCV,
     loadSavedData,
     clearSavedData,
+    setTemplate,
     saveStatus,
     lastSaved,
     hasSavedData,

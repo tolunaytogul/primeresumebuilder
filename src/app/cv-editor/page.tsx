@@ -2,6 +2,7 @@ import CVForm from '@/components/CVForm';
 import CVPreview from '@/components/CVPreview';
 import SaveStatusIndicator from '@/components/SaveStatusIndicator';
 import DataManagement from '@/components/DataManagement';
+import TemplateSelector from '@/components/TemplateSelector';
 import Link from 'next/link';
 
 export default function CVEditorPage() {
@@ -17,12 +18,15 @@ export default function CVEditorPage() {
             </div>
             <p className="text-gray-600 text-sm lg:text-base">Create your professional resume</p>
           </div>
-          <Link 
-            href="/"
-            className="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium whitespace-nowrap"
-          >
-            ← Home
-          </Link>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <TemplateSelector />
+            <Link 
+              href="/"
+              className="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium whitespace-nowrap"
+            >
+              ← Home
+            </Link>
+          </div>
         </div>
         
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">

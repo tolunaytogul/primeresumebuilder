@@ -2,14 +2,16 @@
 
 import React, { useState } from 'react';
 import { pdf } from '@react-pdf/renderer';
-import PDFDocument from './PDFDocument';
+import TemplateFactory from './templates/TemplateFactory';
 import { CVData } from '@/types/cv';
+import { useCV } from '@/context/CVContext';
 
 interface DownloadButtonProps {
   cvData: CVData;
 }
 
 const DownloadButton: React.FC<DownloadButtonProps> = ({ cvData }) => {
+  const { selectedTemplate } = useCV();
   const [isGenerating, setIsGenerating] = useState(false);
 
   // Validation check for required fields
@@ -46,7 +48,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({ cvData }) => {
       setIsGenerating(true);
       
       // Generate PDF
-      const pdfBlob = await pdf(<PDFDocument cvData={cvData} />).toBlob();
+      const pdfBlob = await pdf(<TemplateFactory templateType={selectedTemplate} cvData={cvData} />).toBlob();
       
       // Create download link
       const url = URL.createObjectURL(pdfBlob);
