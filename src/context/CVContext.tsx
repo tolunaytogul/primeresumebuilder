@@ -1,7 +1,8 @@
 'use client';
 
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, ReactNode, useEffect } from 'react';
 import { CVData, PersonalInfo, Experience, Education, Skill } from '@/types/cv';
+import { useAutoSave } from '@/hooks/useAutoSave';
 
 // İlk durum
 const initialState: CVData = {
@@ -30,7 +31,8 @@ type CVAction =
   | { type: 'ADD_SKILL'; payload: Skill }
   | { type: 'UPDATE_SKILL'; payload: { id: string; data: Partial<Skill> } }
   | { type: 'DELETE_SKILL'; payload: string }
-  | { type: 'RESET_CV' };
+  | { type: 'RESET_CV' }
+  | { type: 'LOAD_SAVED_DATA'; payload: CVData };
 
 // Reducer
 function cvReducer(state: CVData, action: CVAction): CVData {
@@ -110,6 +112,9 @@ function cvReducer(state: CVData, action: CVAction): CVData {
     case 'RESET_CV':
       return initialState;
     
+    case 'LOAD_SAVED_DATA':
+      return action.payload;
+    
     default:
       return state;
   }
@@ -130,6 +135,11 @@ interface CVContextType {
   updateSkill: (id: string, data: Partial<Skill>) => void;
   deleteSkill: (id: string) => void;
   resetCV: () => void;
+  loadSavedData: () => void;
+  clearSavedData: () => void;
+  saveStatus: 'idle' | 'saving' | 'saved' | 'error';
+  lastSaved: Date | null;
+  hasSavedData: () => boolean;
 }
 
 // Context oluştur
@@ -138,6 +148,15 @@ const CVContext = createContext<CVContextType | undefined>(undefined);
 // Provider bileşeni
 export function CVProvider({ children }: { children: ReactNode }) {
   const [cvData, dispatch] = useReducer(cvReducer, initialState);
+  const { saveStatus, lastSaved, loadSavedData: loadFromStorage, clearSavedData: clearFromStorage, hasSavedData } = useAutoSave(cvData);
+
+  // Load saved data on mount
+  useEffect(() => {
+    const savedData = loadFromStorage();
+    if (savedData) {
+      dispatch({ type: 'LOAD_SAVED_DATA', payload: savedData });
+    }
+  }, [loadFromStorage]);
 
   // Helper fonksiyonlar
   const updatePersonalInfo = (data: Partial<PersonalInfo>) => {
@@ -182,6 +201,19 @@ export function CVProvider({ children }: { children: ReactNode }) {
 
   const resetCV = () => {
     dispatch({ type: 'RESET_CV' });
+    clearFromStorage();
+  };
+
+  const loadSavedData = () => {
+    const savedData = loadFromStorage();
+    if (savedData) {
+      dispatch({ type: 'LOAD_SAVED_DATA', payload: savedData });
+    }
+  };
+
+  const clearSavedData = () => {
+    clearFromStorage();
+    dispatch({ type: 'RESET_CV' });
   };
 
   const value: CVContextType = {
@@ -198,6 +230,11 @@ export function CVProvider({ children }: { children: ReactNode }) {
     updateSkill,
     deleteSkill,
     resetCV,
+    loadSavedData,
+    clearSavedData,
+    saveStatus,
+    lastSaved,
+    hasSavedData,
   };
 
   return <CVContext.Provider value={value}>{children}</CVContext.Provider>;
