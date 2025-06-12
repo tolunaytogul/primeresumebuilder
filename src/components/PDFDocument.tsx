@@ -4,115 +4,182 @@ import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer';
 import { CVData } from '@/types/cv';
 
-// PDF Styles
+// PDF Styles - Modern Professional Design
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
-    padding: 30,
-    fontFamily: 'Times-Roman',
+    padding: 40,
+    fontFamily: 'Helvetica',
+    fontSize: 11,
+    lineHeight: 1.4,
   },
   header: {
-    marginBottom: 20,
-    borderBottom: 2,
-    borderBottomColor: '#3B82F6',
-    paddingBottom: 10,
+    marginBottom: 25,
+    paddingBottom: 15,
+    borderBottom: 1,
+    borderBottomColor: '#E5E7EB',
+  },
+  nameSection: {
+    marginBottom: 8,
   },
   name: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#1F2937',
-    marginBottom: 5,
+    color: '#111827',
+    marginBottom: 4,
+    letterSpacing: -0.5,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#3B82F6',
-    marginBottom: 10,
+    fontWeight: 'normal',
+    marginBottom: 12,
   },
   contactInfo: {
-    flexDirection: 'column',
-    fontSize: 11,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    fontSize: 10,
     color: '#6B7280',
-    gap: 2,
+    gap: 15,
   },
   contactItem: {
-    marginBottom: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  contactLabel: {
+    fontWeight: 'bold',
+    marginRight: 4,
   },
   section: {
-    marginBottom: 15,
+    marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'bold',
-    color: '#1F2937',
-    marginBottom: 8,
+    color: '#111827',
+    marginBottom: 12,
     textTransform: 'uppercase',
-    letterSpacing: 0.5,
+    letterSpacing: 1,
+    borderBottom: 1,
+    borderBottomColor: '#3B82F6',
+    paddingBottom: 4,
   },
   summary: {
     fontSize: 11,
-    lineHeight: 1.5,
+    lineHeight: 1.6,
     color: '#374151',
     textAlign: 'justify',
+    marginBottom: 5,
   },
   experienceItem: {
-    marginBottom: 12,
-    paddingLeft: 10,
-    borderLeft: 2,
+    marginBottom: 16,
+    paddingLeft: 12,
+    borderLeft: 3,
     borderLeftColor: '#3B82F6',
+    position: 'relative',
+  },
+  experienceHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 4,
+  },
+  experienceLeft: {
+    flex: 1,
   },
   experienceTitle: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: '#111827',
+    marginBottom: 2,
   },
   experienceCompany: {
-    fontSize: 11,
+    fontSize: 12,
     color: '#3B82F6',
     fontWeight: 'bold',
   },
   experienceDate: {
     fontSize: 10,
     color: '#6B7280',
-    marginBottom: 4,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    minWidth: 100,
   },
   experienceDescription: {
     fontSize: 10,
-    lineHeight: 1.4,
+    lineHeight: 1.5,
     color: '#374151',
+    marginTop: 6,
   },
   educationItem: {
-    marginBottom: 10,
-    paddingLeft: 10,
-    borderLeft: 2,
+    marginBottom: 14,
+    paddingLeft: 12,
+    borderLeft: 3,
     borderLeftColor: '#10B981',
   },
+  educationHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 2,
+  },
+  educationLeft: {
+    flex: 1,
+  },
   educationDegree: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: '#111827',
+    marginBottom: 2,
   },
   educationSchool: {
-    fontSize: 11,
+    fontSize: 12,
     color: '#10B981',
     fontWeight: 'bold',
   },
   educationDetails: {
     fontSize: 10,
     color: '#6B7280',
+    marginTop: 2,
+  },
+  educationDate: {
+    fontSize: 10,
+    color: '#6B7280',
+    fontWeight: 'bold',
+    textAlign: 'right',
+    minWidth: 100,
   },
   skillsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    gap: 6,
   },
   skillItem: {
-    backgroundColor: '#F3F4F6',
-    padding: 4,
-    margin: 2,
-    borderRadius: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    marginRight: 6,
+    marginBottom: 6,
+    borderRadius: 12,
     fontSize: 10,
+    fontWeight: 'bold',
+  },
+  skillBeginner: {
+    backgroundColor: '#F3F4F6',
     color: '#374151',
-  }
+  },
+  skillIntermediate: {
+    backgroundColor: '#DBEAFE',
+    color: '#1E40AF',
+  },
+  skillAdvanced: {
+    backgroundColor: '#E9D5FF',
+    color: '#7C3AED',
+  },
+  skillExpert: {
+    backgroundColor: '#FED7AA',
+    color: '#EA580C',
+  },
 });
 
 interface PDFDocumentProps {
@@ -128,22 +195,43 @@ const PDFDocument: React.FC<PDFDocumentProps> = ({ cvData }) => {
     return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
   };
 
+  const getSkillStyle = (level: string) => {
+    switch (level) {
+      case 'Beginner': return [styles.skillItem, styles.skillBeginner];
+      case 'Intermediate': return [styles.skillItem, styles.skillIntermediate];
+      case 'Advanced': return [styles.skillItem, styles.skillAdvanced];
+      case 'Expert': return [styles.skillItem, styles.skillExpert];
+      default: return [styles.skillItem, styles.skillBeginner];
+    }
+  };
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         {/* Header - Personal Info */}
         <View style={styles.header}>
-          <Text style={styles.name}>{personalInfo.name || 'Full Name'}</Text>
-          <Text style={styles.title}>{personalInfo.title || 'Job Title'}</Text>
+          <View style={styles.nameSection}>
+            <Text style={styles.name}>{personalInfo.name || 'Full Name'}</Text>
+            <Text style={styles.title}>{personalInfo.title || 'Job Title'}</Text>
+          </View>
           <View style={styles.contactInfo}>
             {personalInfo.email && (
-              <Text style={styles.contactItem}>Email: {personalInfo.email}</Text>
+              <View style={styles.contactItem}>
+                <Text style={styles.contactLabel}>Email:</Text>
+                <Text>{personalInfo.email}</Text>
+              </View>
             )}
             {personalInfo.phone && (
-              <Text style={styles.contactItem}>Phone: {personalInfo.phone}</Text>
+              <View style={styles.contactItem}>
+                <Text style={styles.contactLabel}>Phone:</Text>
+                <Text>{personalInfo.phone}</Text>
+              </View>
             )}
             {personalInfo.location && (
-              <Text style={styles.contactItem}>Location: {personalInfo.location}</Text>
+              <View style={styles.contactItem}>
+                <Text style={styles.contactLabel}>Location:</Text>
+                <Text>{personalInfo.location}</Text>
+              </View>
             )}
           </View>
         </View>
@@ -162,11 +250,15 @@ const PDFDocument: React.FC<PDFDocumentProps> = ({ cvData }) => {
             <Text style={styles.sectionTitle}>Work Experience</Text>
             {experiences.map((exp) => (
               <View key={exp.id} style={styles.experienceItem}>
-                <Text style={styles.experienceTitle}>{exp.position}</Text>
-                <Text style={styles.experienceCompany}>{exp.company}</Text>
-                <Text style={styles.experienceDate}>
-                  {formatDate(exp.startDate)} - {exp.isCurrentJob ? 'Present' : formatDate(exp.endDate)}
-                </Text>
+                <View style={styles.experienceHeader}>
+                  <View style={styles.experienceLeft}>
+                    <Text style={styles.experienceTitle}>{exp.position}</Text>
+                    <Text style={styles.experienceCompany}>{exp.company}</Text>
+                  </View>
+                  <Text style={styles.experienceDate}>
+                    {formatDate(exp.startDate)} - {exp.isCurrentJob ? 'Present' : formatDate(exp.endDate)}
+                  </Text>
+                </View>
                 {exp.description && (
                   <Text style={styles.experienceDescription}>{exp.description}</Text>
                 )}
@@ -181,13 +273,21 @@ const PDFDocument: React.FC<PDFDocumentProps> = ({ cvData }) => {
             <Text style={styles.sectionTitle}>Education</Text>
             {education.map((edu) => (
               <View key={edu.id} style={styles.educationItem}>
-                <Text style={styles.educationDegree}>{edu.degree}</Text>
-                <Text style={styles.educationSchool}>{edu.school}</Text>
-                <Text style={styles.educationDetails}>
-                  {edu.field && `${edu.field} • `}
-                  {edu.startDate && edu.endDate && `${formatDate(edu.startDate)} - ${formatDate(edu.endDate)}`}
-                  {edu.gpa && ` • GPA: ${edu.gpa}`}
-                </Text>
+                <View style={styles.educationHeader}>
+                  <View style={styles.educationLeft}>
+                    <Text style={styles.educationDegree}>{edu.degree}</Text>
+                    <Text style={styles.educationSchool}>{edu.school}</Text>
+                    <Text style={styles.educationDetails}>
+                      {edu.field && `${edu.field}`}
+                      {edu.gpa && ` • GPA: ${edu.gpa}`}
+                    </Text>
+                  </View>
+                  {edu.startDate && edu.endDate && (
+                    <Text style={styles.educationDate}>
+                      {formatDate(edu.startDate)} - {formatDate(edu.endDate)}
+                    </Text>
+                  )}
+                </View>
               </View>
             ))}
           </View>
@@ -199,8 +299,8 @@ const PDFDocument: React.FC<PDFDocumentProps> = ({ cvData }) => {
             <Text style={styles.sectionTitle}>Skills</Text>
             <View style={styles.skillsContainer}>
               {skills.map((skill) => (
-                <Text key={skill.id} style={styles.skillItem}>
-                  {skill.name} • {skill.level}
+                <Text key={skill.id} style={getSkillStyle(skill.level)}>
+                  {skill.name}
                 </Text>
               ))}
             </View>
