@@ -84,14 +84,14 @@ export default function SkillsForm() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0">
         <h3 className="text-lg font-semibold text-gray-800">
           Skills
         </h3>
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="px-4 py-2 text-sm bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+            className="w-full sm:w-auto px-4 py-2 text-sm bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
           >
             + Add Skill
           </button>
@@ -139,16 +139,16 @@ export default function SkillsForm() {
           </div>
 
           {/* Form Actions */}
-          <div className="flex gap-2 mt-4">
+          <div className="flex flex-col sm:flex-row gap-2 mt-4">
             <button
               onClick={editingId ? handleUpdate : handleAdd}
-              className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
             >
               {editingId ? 'Update' : 'Add'} Skill
             </button>
             <button
               onClick={resetForm}
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
             >
               Cancel
             </button>
@@ -167,15 +167,16 @@ export default function SkillsForm() {
         ) : (
           <>
             {/* Skills Display */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {skills.map((skill) => (
                 <div
                   key={skill.id}
-                  className={`px-3 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${getLevelColor(skill.level)} border`}
+                  className={`px-2 sm:px-3 py-2 rounded-full text-xs sm:text-sm font-medium flex items-center gap-1 sm:gap-2 ${getLevelColor(skill.level)} border`}
                 >
                   <span>{skill.name}</span>
-                  <span className="text-xs opacity-75">• {skill.level}</span>
-                  <div className="flex gap-1 ml-2">
+                  <span className="text-xs opacity-75 hidden sm:inline">• {skill.level}</span>
+                  <span className="text-xs opacity-75 sm:hidden">•</span>
+                  <div className="flex gap-1">
                     <button
                       onClick={() => handleEdit(skill)}
                       className="text-purple-600 hover:text-purple-800 text-xs underline"
@@ -195,12 +196,12 @@ export default function SkillsForm() {
 
             {/* Skills Summary */}
             <div className="border-t pt-4">
-              <div className="text-sm text-gray-600 flex flex-wrap gap-4">
+              <div className="text-xs sm:text-sm text-gray-600 flex flex-wrap gap-2 sm:gap-4">
                 <span>Total: <strong>{skills.length}</strong> skills</span>
                 <span>Expert: <strong>{skills.filter(s => s.level === 'Expert').length}</strong></span>
                 <span>Advanced: <strong>{skills.filter(s => s.level === 'Advanced').length}</strong></span>
-                <span>Intermediate: <strong>{skills.filter(s => s.level === 'Intermediate').length}</strong></span>
-                <span>Beginner: <strong>{skills.filter(s => s.level === 'Beginner').length}</strong></span>
+                <span className="hidden sm:inline">Intermediate: <strong>{skills.filter(s => s.level === 'Intermediate').length}</strong></span>
+                <span className="hidden sm:inline">Beginner: <strong>{skills.filter(s => s.level === 'Beginner').length}</strong></span>
               </div>
             </div>
           </>

@@ -90,14 +90,14 @@ export default function ExperienceForm() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0">
         <h3 className="text-lg font-semibold text-gray-800">
           Work Experience
         </h3>
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            className="w-full sm:w-auto px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
           >
             + Add Experience
           </button>
@@ -196,16 +196,16 @@ export default function ExperienceForm() {
           </div>
 
           {/* Form Actions */}
-          <div className="flex gap-2 mt-4">
+          <div className="flex flex-col sm:flex-row gap-2 mt-4">
             <button
               onClick={editingId ? handleUpdate : handleAdd}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
             >
               {editingId ? 'Update' : 'Add'} Experience
             </button>
             <button
               onClick={resetForm}
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
             >
               Cancel
             </button>
@@ -224,7 +224,7 @@ export default function ExperienceForm() {
         ) : (
           experiences.map((experience) => (
             <div key={experience.id} className="border border-gray-200 rounded-lg p-4 bg-white">
-              <div className="flex justify-between items-start">
+              <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
                 <div className="flex-1">
                   <h4 className="font-semibold text-gray-800">{experience.position}</h4>
                   <p className="text-blue-600 font-medium">{experience.company}</p>
@@ -235,16 +235,16 @@ export default function ExperienceForm() {
                     <p className="text-sm text-gray-700 mt-2">{experience.description}</p>
                   )}
                 </div>
-                <div className="flex gap-2 ml-4">
+                <div className="flex gap-2 w-full sm:w-auto sm:ml-4">
                   <button
                     onClick={() => handleEdit(experience)}
-                    className="text-blue-600 hover:text-blue-800 text-sm"
+                    className="flex-1 sm:flex-none px-3 py-1 text-blue-600 hover:text-blue-800 text-sm bg-blue-50 hover:bg-blue-100 rounded transition-colors"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(experience.id)}
-                    className="text-red-600 hover:text-red-800 text-sm"
+                    className="flex-1 sm:flex-none px-3 py-1 text-red-600 hover:text-red-800 text-sm bg-red-50 hover:bg-red-100 rounded transition-colors"
                   >
                     Delete
                   </button>
