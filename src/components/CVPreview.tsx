@@ -2,13 +2,19 @@
 
 import React from 'react';
 import { useCV } from '@/context/CVContext';
+import DownloadButton from './DownloadButton';
 
 export default function CVPreview() {
   const { cvData } = useCV();
   const { personalInfo, experiences, education, skills } = cvData;
 
   return (
-    <div className="bg-white p-8 shadow-lg rounded-lg min-h-[800px]">
+    <div className="space-y-4">
+      {/* Download Button */}
+      <DownloadButton cvData={cvData} />
+      
+      {/* CV Preview */}
+      <div className="bg-white p-8 shadow-lg rounded-lg min-h-[800px]">
       {/* Header - Kişisel Bilgiler */}
       <div className="border-b-2 border-gray-200 pb-6 mb-6">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
@@ -143,6 +149,7 @@ export default function CVPreview() {
           <p className="text-sm mt-2">Start by filling out the form on the left</p>
         </div>
       )}
+      </div>
     </div>
   );
 } 
