@@ -4,6 +4,7 @@ import React, { createContext, useContext, useReducer, ReactNode, useEffect } fr
 import { CVData, PersonalInfo, Experience, Education, Skill } from '@/types/cv';
 import { TemplateType } from '@/types/template';
 import { useAutoSave } from '@/hooks/useAutoSave';
+import { sampleCVData } from '@/data/sampleData';
 
 // İlk durum
 const initialState: CVData = {
@@ -140,6 +141,7 @@ interface CVContextType {
   resetCV: () => void;
   loadSavedData: () => void;
   clearSavedData: () => void;
+  loadSampleData: () => void;
   setTemplate: (template: TemplateType) => void;
   saveStatus: 'idle' | 'saving' | 'saved' | 'error';
   lastSaved: Date | null;
@@ -160,6 +162,9 @@ export function CVProvider({ children }: { children: ReactNode }) {
     const savedData = loadFromStorage();
     if (savedData) {
       dispatch({ type: 'LOAD_SAVED_DATA', payload: savedData });
+    } else {
+      // Load sample data if no saved data exists
+      dispatch({ type: 'LOAD_SAVED_DATA', payload: sampleCVData });
     }
     
     // Load saved template preference
@@ -236,6 +241,10 @@ export function CVProvider({ children }: { children: ReactNode }) {
     setSelectedTemplate(template);
   };
 
+  const loadSampleData = () => {
+    dispatch({ type: 'LOAD_SAVED_DATA', payload: sampleCVData });
+  };
+
   const value: CVContextType = {
     cvData,
     selectedTemplate,
@@ -253,6 +262,7 @@ export function CVProvider({ children }: { children: ReactNode }) {
     resetCV,
     loadSavedData,
     clearSavedData,
+    loadSampleData,
     setTemplate,
     saveStatus,
     lastSaved,
