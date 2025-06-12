@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
     padding: 30,
-    fontFamily: 'Helvetica',
+    fontFamily: 'Times-Roman',
   },
   header: {
     marginBottom: 20,
@@ -30,14 +30,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   contactInfo: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    fontSize: 10,
+    flexDirection: 'column',
+    fontSize: 11,
     color: '#6B7280',
+    gap: 2,
   },
   contactItem: {
-    marginRight: 15,
-    marginBottom: 3,
+    marginBottom: 2,
   },
   section: {
     marginBottom: 15,
@@ -138,13 +137,13 @@ const PDFDocument: React.FC<PDFDocumentProps> = ({ cvData }) => {
           <Text style={styles.title}>{personalInfo.title || 'Job Title'}</Text>
           <View style={styles.contactInfo}>
             {personalInfo.email && (
-              <Text style={styles.contactItem}>✉ {personalInfo.email}</Text>
+              <Text style={styles.contactItem}>Email: {personalInfo.email}</Text>
             )}
             {personalInfo.phone && (
-              <Text style={styles.contactItem}>📱 {personalInfo.phone}</Text>
+              <Text style={styles.contactItem}>Phone: {personalInfo.phone}</Text>
             )}
             {personalInfo.location && (
-              <Text style={styles.contactItem}>📍 {personalInfo.location}</Text>
+              <Text style={styles.contactItem}>Location: {personalInfo.location}</Text>
             )}
           </View>
         </View>
