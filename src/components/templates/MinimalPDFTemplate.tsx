@@ -9,20 +9,20 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
-    padding: 60,
+    padding: 40,
     fontFamily: 'Helvetica',
     fontSize: 10,
-    lineHeight: 1.5,
+    lineHeight: 1.4,
   },
   header: {
-    marginBottom: 40,
+    marginBottom: 25,
   },
   name: {
-    fontSize: 32,
+    fontSize: 26,
     fontWeight: 'normal',
     color: '#000000',
-    marginBottom: 8,
-    letterSpacing: -1,
+    marginBottom: 6,
+    letterSpacing: -0.5,
   },
   title: {
     fontSize: 14,
@@ -41,15 +41,15 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   section: {
-    marginBottom: 35,
+    marginBottom: 22,
   },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: 'bold',
     color: '#000000',
-    marginBottom: 20,
+    marginBottom: 12,
     textTransform: 'lowercase',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
   summary: {
     fontSize: 10,
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   experienceItem: {
-    marginBottom: 25,
+    marginBottom: 15,
   },
   experienceHeader: {
     flexDirection: 'row',
