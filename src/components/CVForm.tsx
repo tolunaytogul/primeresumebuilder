@@ -2,16 +2,41 @@
 
 import React from 'react';
 import { useCV } from '@/context/CVContext';
+import { useFormValidation } from '@/hooks/useFormValidation';
 import ExperienceForm from './ExperienceForm';
 import EducationForm from './EducationForm';
 import SkillsForm from './SkillsForm';
 
+const validationRules = {
+  name: { required: true, minLength: 2 },
+  title: { required: true, minLength: 2 },
+  email: { required: true, email: true }
+};
+
 export default function CVForm() {
   const { cvData, updatePersonalInfo } = useCV();
   const { personalInfo } = cvData;
+  const { errors, validateSingleField, clearError } = useFormValidation(validationRules);
 
   const handleInputChange = (field: string, value: string) => {
     updatePersonalInfo({ [field]: value });
+    
+    // Clear error when user starts typing
+    if (errors[field]) {
+      clearError(field);
+    }
+  };
+
+  const handleBlur = (field: string, value: string) => {
+    validateSingleField(field, value);
+  };
+
+  const getInputClassName = (field: string) => {
+    const baseClass = "w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-colors";
+    const errorClass = "border-red-300 focus:ring-red-500";
+    const normalClass = "border-gray-300 focus:ring-blue-500";
+    
+    return `${baseClass} ${errors[field] ? errorClass : normalClass}`;
   };
 
   return (
@@ -32,9 +57,16 @@ export default function CVForm() {
               id="name"
               value={personalInfo.name}
               onChange={(e) => handleInputChange('name', e.target.value)}
+              onBlur={(e) => handleBlur('name', e.target.value)}
               placeholder="Enter your full name"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={getInputClassName('name')}
             />
+            {errors.name && (
+              <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                <span className="text-red-500">⚠</span>
+                {errors.name}
+              </p>
+            )}
           </div>
 
           {/* Unvan */}
@@ -47,9 +79,16 @@ export default function CVForm() {
               id="title"
               value={personalInfo.title}
               onChange={(e) => handleInputChange('title', e.target.value)}
+              onBlur={(e) => handleBlur('title', e.target.value)}
               placeholder="e.g. Frontend Developer, Marketing Manager"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={getInputClassName('title')}
             />
+            {errors.title && (
+              <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                <span className="text-red-500">⚠</span>
+                {errors.title}
+              </p>
+            )}
           </div>
 
           {/* E-posta */}
@@ -62,9 +101,16 @@ export default function CVForm() {
               id="email"
               value={personalInfo.email}
               onChange={(e) => handleInputChange('email', e.target.value)}
+              onBlur={(e) => handleBlur('email', e.target.value)}
               placeholder="example@email.com"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className={getInputClassName('email')}
             />
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                <span className="text-red-500">⚠</span>
+                {errors.email}
+              </p>
+            )}
           </div>
 
           {/* Telefon */}

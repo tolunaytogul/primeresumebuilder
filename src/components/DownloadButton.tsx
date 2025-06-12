@@ -12,7 +12,36 @@ interface DownloadButtonProps {
 const DownloadButton: React.FC<DownloadButtonProps> = ({ cvData }) => {
   const [isGenerating, setIsGenerating] = useState(false);
 
+  // Validation check for required fields
+  const isFormValid = () => {
+    const { personalInfo } = cvData;
+    return (
+      personalInfo.name?.trim() &&
+      personalInfo.title?.trim() &&
+      personalInfo.email?.trim() &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(personalInfo.email)
+    );
+  };
+
+  const getMissingFields = () => {
+    const { personalInfo } = cvData;
+    const missing = [];
+    
+    if (!personalInfo.name?.trim()) missing.push('Full Name');
+    if (!personalInfo.title?.trim()) missing.push('Job Title');
+    if (!personalInfo.email?.trim()) missing.push('Email');
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(personalInfo.email)) missing.push('Valid Email');
+    
+    return missing;
+  };
+
   const handleDownload = async () => {
+    if (!isFormValid()) {
+      const missingFields = getMissingFields();
+      alert(`Please fill in the following required fields:\n• ${missingFields.join('\n• ')}`);
+      return;
+    }
+
     try {
       setIsGenerating(true);
       
@@ -47,26 +76,40 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({ cvData }) => {
     }
   };
 
+  const formValid = isFormValid();
+
   return (
-    <button
-      onClick={handleDownload}
-      disabled={isGenerating}
-      className="w-full px-4 py-3 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
-    >
-      {isGenerating ? (
-        <>
-          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-          Generating PDF...
-        </>
-      ) : (
-        <>
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-          </svg>
-          Download PDF
-        </>
+    <div className="space-y-2">
+      <button
+        onClick={handleDownload}
+        disabled={isGenerating || !formValid}
+        className={`w-full px-4 py-3 font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 ${
+          formValid 
+            ? 'bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white' 
+            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+        }`}
+      >
+        {isGenerating ? (
+          <>
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            Generating PDF...
+          </>
+        ) : (
+          <>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Download PDF
+          </>
+        )}
+      </button>
+      
+      {!formValid && (
+        <p className="text-xs text-gray-500 text-center">
+          Complete required fields (Name, Title, Email) to download
+        </p>
       )}
-    </button>
+    </div>
   );
 };
 
