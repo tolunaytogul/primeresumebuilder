@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useCV } from '@/context/CVContext';
 import { AVAILABLE_TEMPLATES, TemplateType } from '@/types/template';
+import TemplatePreview from './TemplatePreview';
 
 export default function TemplateSelector() {
   const { selectedTemplate, setTemplate } = useCV();
@@ -43,36 +44,34 @@ export default function TemplateSelector() {
 
       {/* Template Selection Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[320px]">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[400px]">
           <div className="p-4">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Choose Template</h3>
+            <h3 className="text-sm font-semibold text-gray-900 mb-4">Choose Template</h3>
             <div className="grid grid-cols-1 gap-3">
               {AVAILABLE_TEMPLATES.map((template) => (
                 <button
                   key={template.id}
                   onClick={() => handleTemplateSelect(template.id)}
-                  className={`flex items-start gap-3 p-3 rounded-lg border-2 transition-all text-left ${
+                  className={`flex items-start gap-4 p-3 rounded-lg border-2 transition-all text-left hover:shadow-md ${
                     selectedTemplate === template.id
-                      ? 'border-blue-500 bg-blue-50'
+                      ? 'border-blue-500 bg-blue-50 shadow-md'
                       : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                   }`}
                 >
                   {/* Template Preview */}
-                  <div className={`w-12 h-16 rounded shadow-sm flex items-center justify-center text-white text-xs font-bold ${
-                    template.id === 'modern' ? 'bg-gradient-to-br from-blue-500 to-blue-600' :
-                    template.id === 'classic' ? 'bg-gradient-to-br from-gray-600 to-gray-700' :
-                    template.id === 'creative' ? 'bg-gradient-to-br from-purple-500 to-pink-500' :
-                    'bg-gradient-to-br from-green-500 to-green-600'
-                  }`}>
-                    CV
+                  <div className="flex-shrink-0">
+                    <TemplatePreview 
+                      templateType={template.id} 
+                      className="w-16 h-20 border border-gray-200 rounded shadow-sm"
+                    />
                   </div>
                   
                   {/* Template Info */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-medium text-gray-900 text-sm">{template.name}</h4>
+                    <div className="flex items-center gap-2 mb-2">
+                      <h4 className="font-semibold text-gray-900 text-sm">{template.name}</h4>
                       {template.isPremium && (
-                        <span className="px-2 py-0.5 bg-orange-100 text-orange-800 text-xs font-medium rounded">
+                        <span className="px-2 py-0.5 bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-medium rounded-full">
                           Premium
                         </span>
                       )}
@@ -85,6 +84,34 @@ export default function TemplateSelector() {
                       )}
                     </div>
                     <p className="text-xs text-gray-500 leading-relaxed">{template.description}</p>
+                    
+                    {/* Template Features */}
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {template.id === 'modern' && (
+                        <>
+                          <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded">Professional</span>
+                          <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded">Skill Badges</span>
+                        </>
+                      )}
+                      {template.id === 'classic' && (
+                        <>
+                          <span className="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">Traditional</span>
+                          <span className="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">Conservative</span>
+                        </>
+                      )}
+                      {template.id === 'creative' && (
+                        <>
+                          <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded">Two-Column</span>
+                          <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded">Progress Bars</span>
+                        </>
+                      )}
+                      {template.id === 'minimal' && (
+                        <>
+                          <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded">Clean</span>
+                          <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded">Spacious</span>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </button>
               ))}
