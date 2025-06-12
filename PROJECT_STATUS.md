@@ -35,3 +35,5 @@ Son Commit: ebcbe35 (PDF Layout Fixes)
 - TypeScript: Strict mode aktif, type safety korunmalı
 
 Son Güncelleme: Fri Jun 13 02:17:51 +03 2025
+
+## 📱 ÖNEMLİ: MOBİL ÖNCELİK
