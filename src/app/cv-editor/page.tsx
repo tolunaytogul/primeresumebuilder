@@ -9,6 +9,8 @@ import PremiumBadge from '@/components/PremiumBadge';
 import Link from 'next/link';
 import { useCV } from '@/context/CVContext';
 import { useState } from 'react';
+import { Layout } from '@/components/layout';
+import { Container, Button, Heading, Text, Card, FadeIn, SlideUp } from '@/components/ui';
 
 export default function CVEditorPage() {
   const { clearSavedData, loadSampleData, hasSavedData } = useCV();
@@ -28,130 +30,151 @@ export default function CVEditorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-4 lg:py-8">
+    <Layout className="bg-neutral-50">
+      <Container className="py-4 lg:py-8">
         {/* Header */}
-        <div className="flex flex-col gap-4 mb-6 lg:mb-8">
-          {/* Top Row - Title and Navigation */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
-            <div className="flex-1">
-              <div className="flex items-center gap-4 mb-2">
-                <h1 className="text-2xl lg:text-3xl font-bold text-gray-800">Resume Builder</h1>
-                <SaveStatusIndicator />
-                <PremiumBadge />
+        <FadeIn>
+          <div className="flex flex-col gap-4 mb-6 lg:mb-8">
+            {/* Top Row - Title and Navigation */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
+              <div className="flex-1">
+                <div className="flex items-center gap-4 mb-2">
+                  <Heading level={1} size="3xl" className="text-gradient">
+                    Resume Builder
+                  </Heading>
+                  <SaveStatusIndicator />
+                  <PremiumBadge />
+                </div>
+                <Text color="muted">Create your professional resume</Text>
               </div>
-              <p className="text-gray-600 text-sm lg:text-base">Create your professional resume</p>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <TemplateSelector />
+                <Button variant="ghost" size="sm" className="hover-lift">
+                  <Link href="/">
+                    ← Home
+                  </Link>
+                </Button>
+              </div>
             </div>
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-              <TemplateSelector />
-              <Link 
-                href="/"
-                className="px-4 py-2 text-blue-600 hover:text-blue-800 font-medium whitespace-nowrap"
-              >
-                ← Home
-              </Link>
-            </div>
-          </div>
 
-          {/* Data Management Controls - Mobile Optimized */}
-          <div className="flex flex-col sm:flex-row gap-3 p-4 bg-white rounded-lg shadow-sm border">
-            <div className="flex-1">
-              <h4 className="text-sm font-medium text-gray-700 mb-1">Quick Actions</h4>
-              <p className="text-xs text-gray-500">Your data is automatically saved</p>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-              {/* Sample Data Button */}
-              <button
-                onClick={loadSampleData}
-                className="px-4 py-2 text-sm font-medium rounded-lg transition-colors bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 whitespace-nowrap"
-              >
-                📄 Load Sample Data
-              </button>
-              
-              {/* Clear Data Button */}
-              {hasSavedData() && (
-                <div className="flex gap-2">
-                  {showConfirm ? (
-                    <>
-                      <button
-                        onClick={handleClearData}
-                        className="px-4 py-2 text-sm font-medium bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors whitespace-nowrap"
-                      >
-                        ✓ Confirm Clear
-                      </button>
-                      <button
-                        onClick={handleCancel}
-                        className="px-4 py-2 text-sm font-medium border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors whitespace-nowrap"
-                      >
-                        ✕ Cancel
-                      </button>
-                    </>
-                  ) : (
-                    <button
-                      onClick={handleClearData}
-                      className="px-4 py-2 text-sm font-medium text-red-600 hover:text-red-800 border border-red-200 hover:border-red-300 rounded-lg transition-colors whitespace-nowrap"
-                    >
-                      🗑️ Clear All Data
-                    </button>
+            {/* Data Management Controls - Mobile Optimized */}
+            <Card className="hover-lift transition-all duration-300">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex-1">
+                  <Heading level={4} size="sm" className="mb-1">Quick Actions</Heading>
+                  <Text size="xs" color="muted">Your data is automatically saved</Text>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                  {/* Sample Data Button */}
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={loadSampleData}
+                    className="bg-primary-50 text-primary-700 border-primary-200 hover:bg-primary-100 whitespace-nowrap"
+                  >
+                    📄 Load Sample Data
+                  </Button>
+                  
+                  {/* Clear Data Button */}
+                  {hasSavedData() && (
+                    <div className="flex gap-2">
+                      {showConfirm ? (
+                        <>
+                          <Button
+                            variant="danger"
+                            size="sm"
+                            onClick={handleClearData}
+                            className="whitespace-nowrap"
+                          >
+                            ✓ Confirm Clear
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={handleCancel}
+                            className="whitespace-nowrap"
+                          >
+                            ✕ Cancel
+                          </Button>
+                        </>
+                      ) : (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={handleClearData}
+                          className="text-danger-600 hover:text-danger-800 border-danger-200 hover:border-danger-300 whitespace-nowrap"
+                        >
+                          🗑️ Clear All Data
+                        </Button>
+                      )}
+                    </div>
                   )}
                 </div>
-              )}
-            </div>
+              </div>
+            </Card>
           </div>
-        </div>
+        </FadeIn>
         
         {/* Mobile-First Layout: Preview First, Then Form */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 lg:hidden">
           {/* CV Preview Section - Now at Top for Mobile */}
-          <div className="w-full">
-            <div className="mb-4">
-              <h2 className="text-lg font-semibold text-gray-800 mb-2">📋 Live Preview</h2>
-              <p className="text-sm text-gray-600">See your changes in real-time</p>
+          <SlideUp delay={0.2}>
+            <div className="w-full">
+              <div className="mb-4">
+                <Heading level={2} size="lg" className="mb-2">📋 Live Preview</Heading>
+                <Text size="sm" color="muted">See your changes in real-time</Text>
+              </div>
+              <CVPreview />
             </div>
-            <CVPreview />
-          </div>
+          </SlideUp>
           
           {/* Form Section - Below Preview for Mobile */}
-          <div className="w-full">
-            <div className="mb-4">
-              <h2 className="text-lg font-semibold text-gray-800 mb-2">✏️ Edit Your Resume</h2>
-              <p className="text-sm text-gray-600">Fill in your information below</p>
+          <SlideUp delay={0.4}>
+            <div className="w-full">
+              <div className="mb-4">
+                <Heading level={2} size="lg" className="mb-2">✏️ Edit Your Resume</Heading>
+                <Text size="sm" color="muted">Fill in your information below</Text>
+              </div>
+              <Card padding="lg" className="hover-lift transition-all duration-300">
+                <CVForm />
+              </Card>
             </div>
-            <div className="bg-white rounded-lg shadow-sm p-4 lg:p-6">
-              <CVForm />
-            </div>
-          </div>
+          </SlideUp>
         </div>
 
         {/* Desktop Layout: Side by Side */}
         <div className="hidden lg:block">
           <div className="flex gap-8 mt-8">
             {/* Form Section */}
-            <div className="w-1/2">
-              <div className="mb-4">
-                <h2 className="text-lg font-semibold text-gray-800 mb-2">✏️ Edit Your Resume</h2>
-                <p className="text-sm text-gray-600">Fill in your information</p>
+            <SlideUp delay={0.2}>
+              <div className="w-1/2">
+                <div className="mb-4">
+                  <Heading level={2} size="lg" className="mb-2">✏️ Edit Your Resume</Heading>
+                  <Text size="sm" color="muted">Fill in your information</Text>
+                </div>
+                <Card padding="lg" className="hover-lift transition-all duration-300">
+                  <CVForm />
+                </Card>
               </div>
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                <CVForm />
-              </div>
-            </div>
+            </SlideUp>
             
             {/* Preview Section */}
-            <div className="w-1/2">
-              <div className="mb-4">
-                <h2 className="text-lg font-semibold text-gray-800 mb-2">📋 Live Preview</h2>
-                <p className="text-sm text-gray-600">See your changes in real-time</p>
+            <SlideUp delay={0.4}>
+              <div className="w-1/2">
+                <div className="mb-4">
+                  <Heading level={2} size="lg" className="mb-2">📋 Live Preview</Heading>
+                  <Text size="sm" color="muted">See your changes in real-time</Text>
+                </div>
+                <CVPreview />
               </div>
-              <CVPreview />
-            </div>
+            </SlideUp>
           </div>
         </div>
-      </div>
+      </Container>
       
       {/* Premium Modal */}
       <PremiumModal />
-    </div>
+    </Layout>
   );
 } 
