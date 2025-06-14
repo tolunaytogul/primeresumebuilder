@@ -20,7 +20,7 @@ export default function TemplateSelector() {
   return (
     <div className="relative">
       <div className="mb-2">
-        <label className="block text-body-sm font-medium text-content-tertiary">
+        <label className="block text-body-sm text-red font-medium text-content-tertiary">
           Choose Template
         </label>
       </div>
