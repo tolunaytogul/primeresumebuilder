@@ -91,7 +91,7 @@ export default function SkillsForm() {
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="w-full sm:w-auto px-4 py-2 text-sm bg-secondary-600 text-white rounded-md hover:bg-secondary-700 transition-colors"
+            className="w-full sm:w-auto px-4 py-2 text-sm bg-surface-brand text-content-inverse rounded-md hover:bg-surface-brand-light transition-colors"
           >
             + Add Skill
           </button>
@@ -100,7 +100,7 @@ export default function SkillsForm() {
 
       {/* Add/Edit Form */}
       {isAdding && (
-        <div className="border border-ui-primary rounded-lg p-4 bg-surface-primary">
+        <div className="border border-ui-primary rounded-lg p-4 bg-surface-secondary">
           <h4 className="font-medium text-content-primary mb-4">
             {editingId ? 'Edit Skill' : 'Add New Skill'}
           </h4>
@@ -116,7 +116,7 @@ export default function SkillsForm() {
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 placeholder="e.g. JavaScript, Photoshop, Leadership"
-                className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-500"
+                className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
               />
             </div>
 
@@ -128,7 +128,7 @@ export default function SkillsForm() {
               <select
                 value={formData.level}
                 onChange={(e) => handleInputChange('level', e.target.value as Skill['level'])}
-                className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-500"
+                className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
               >
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
@@ -142,7 +142,7 @@ export default function SkillsForm() {
           <div className="flex flex-col sm:flex-row gap-2 mt-4">
             <button
               onClick={editingId ? handleUpdate : handleAdd}
-              className="w-full sm:w-auto px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 bg-surface-brand text-content-inverse rounded-md hover:bg-surface-brand-light transition-colors"
             >
               {editingId ? 'Update' : 'Add'} Skill
             </button>

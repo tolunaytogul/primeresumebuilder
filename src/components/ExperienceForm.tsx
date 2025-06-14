@@ -88,16 +88,23 @@ export default function ExperienceForm() {
     setEditingId(null);
   };
 
+  // Format date helper
+  const formatDate = (dateString: string) => {
+    if (!dateString) return '';
+    const date = new Date(dateString + '-01');
+    return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0">
-        <h3 className="text-lg font-semibold text-gray-800">
+        <h3 className="text-lg font-semibold text-content-primary">
           Work Experience
         </h3>
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-                            className="w-full sm:w-auto px-4 py-2 text-sm bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+            className="w-full sm:w-auto px-4 py-2 text-sm bg-surface-brand text-content-inverse rounded-md hover:bg-surface-brand-light transition-colors"
           >
             + Add Experience
           </button>
@@ -106,15 +113,29 @@ export default function ExperienceForm() {
 
       {/* Add/Edit Form */}
       {isAdding && (
-        <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-          <h4 className="font-medium text-gray-800 mb-4">
+        <div className="border border-ui-primary rounded-lg p-4 bg-surface-secondary">
+          <h4 className="font-medium text-content-primary mb-4">
             {editingId ? 'Edit Experience' : 'Add New Experience'}
           </h4>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Position */}
+            <div>
+              <label className="block text-body-sm font-medium text-content-tertiary mb-2">
+                Position *
+              </label>
+              <input
+                type="text"
+                value={formData.position}
+                onChange={(e) => handleInputChange('position', e.target.value)}
+                placeholder="e.g. Frontend Developer"
+                className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
+              />
+            </div>
+
             {/* Company */}
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-2">
+              <label className="block text-body-sm font-medium text-content-tertiary mb-2">
                 Company *
               </label>
               <input
@@ -122,90 +143,77 @@ export default function ExperienceForm() {
                 value={formData.company}
                 onChange={(e) => handleInputChange('company', e.target.value)}
                 placeholder="e.g. Google, Microsoft"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-              />
-            </div>
-
-            {/* Position */}
-            <div>
-              <label className="block text-sm font-medium text-gray-600 mb-2">
-                Position *
-              </label>
-              <input
-                type="text"
-                value={formData.position}
-                onChange={(e) => handleInputChange('position', e.target.value)}
-                placeholder="e.g. Software Engineer"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
               />
             </div>
 
             {/* Start Date */}
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-2">
-                Start Date
+              <label className="block text-body-sm font-medium text-content-tertiary mb-2">
+                Start Date *
               </label>
               <input
                 type="month"
                 value={formData.startDate}
                 onChange={(e) => handleInputChange('startDate', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
               />
+            </div>
+
+            {/* Current Job Checkbox */}
+            <div className="flex items-center">
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={formData.isCurrentJob}
+                  onChange={(e) => handleInputChange('isCurrentJob', e.target.checked)}
+                  className="rounded border-ui-secondary focus:ring-brand"
+                />
+                <span className="text-body-sm text-content-secondary">I currently work here</span>
+              </label>
             </div>
 
             {/* End Date */}
-            <div>
-              <label className="block text-sm font-medium text-gray-600 mb-2">
-                End Date
+            {!formData.isCurrentJob && (
+              <div className="md:col-span-2">
+                <label className="block text-body-sm font-medium text-content-tertiary mb-2">
+                  End Date *
+                </label>
+                <input
+                  type="month"
+                  value={formData.endDate}
+                  onChange={(e) => handleInputChange('endDate', e.target.value)}
+                  className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
+                />
+              </div>
+            )}
+
+            {/* Description */}
+            <div className="md:col-span-2">
+              <label className="block text-body-sm font-medium text-content-tertiary mb-2">
+                Description
               </label>
-              <input
-                type="month"
-                value={formData.endDate}
-                onChange={(e) => handleInputChange('endDate', e.target.value)}
-                disabled={formData.isCurrentJob}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:bg-gray-100"
+              <textarea
+                value={formData.description}
+                onChange={(e) => handleInputChange('description', e.target.value)}
+                placeholder="Describe your role, achievements, and responsibilities..."
+                rows={4}
+                className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-brand resize-none"
               />
             </div>
-          </div>
-
-          {/* Currently Working */}
-          <div className="mt-4">
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                checked={formData.isCurrentJob}
-                onChange={(e) => handleInputChange('isCurrentJob', e.target.checked)}
-                className="mr-2"
-              />
-              <span className="text-sm text-gray-700">I currently work here</span>
-            </label>
-          </div>
-
-          {/* Description */}
-          <div className="mt-4">
-            <label className="block text-sm font-medium text-gray-600 mb-2">
-              Description
-            </label>
-            <textarea
-              value={formData.description}
-              onChange={(e) => handleInputChange('description', e.target.value)}
-              placeholder="Describe your responsibilities and achievements..."
-              rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
-            />
           </div>
 
           {/* Form Actions */}
           <div className="flex flex-col sm:flex-row gap-2 mt-4">
             <button
               onClick={editingId ? handleUpdate : handleAdd}
-              className="w-full sm:w-auto px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 bg-surface-brand text-content-inverse rounded-md hover:bg-surface-brand-light transition-colors"
             >
               {editingId ? 'Update' : 'Add'} Experience
             </button>
             <button
               onClick={resetForm}
-              className="w-full sm:w-auto px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 border border-ui-secondary text-content-secondary rounded-md hover:bg-surface-secondary transition-colors"
             >
               Cancel
             </button>
@@ -214,37 +222,37 @@ export default function ExperienceForm() {
       )}
 
       {/* Experience List */}
-      <div className="space-y-3">
+      <div className="space-y-4">
         {experiences.length === 0 ? (
-          <div className="text-center text-gray-500 py-8">
+          <div className="text-center text-content-quaternary py-8">
             <div className="text-4xl mb-2">💼</div>
             <p>No work experience added yet</p>
             <p className="text-sm mt-1">Click "Add Experience" to get started</p>
           </div>
         ) : (
           experiences.map((experience) => (
-            <div key={experience.id} className="border border-gray-200 rounded-lg p-4 bg-white">
-              <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
+            <div key={experience.id} className="border border-ui-primary rounded-lg p-4 bg-white">
+              <div className="flex justify-between items-start gap-4">
                 <div className="flex-1">
-                  <h4 className="font-semibold text-gray-800">{experience.position}</h4>
-                  <p className="text-primary-600 font-medium">{experience.company}</p>
-                  <p className="text-sm text-gray-500">
-                    {experience.startDate && new Date(experience.startDate + '-01').toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} - {experience.isCurrentJob ? 'Present' : (experience.endDate && new Date(experience.endDate + '-01').toLocaleDateString('en-US', { month: 'short', year: 'numeric' }))}
+                  <h4 className="font-semibold text-content-primary">{experience.position}</h4>
+                  <p className="text-content-brand font-medium">{experience.company}</p>
+                  <p className="text-body-sm text-content-tertiary">
+                    {formatDate(experience.startDate)} - {experience.isCurrentJob ? 'Present' : formatDate(experience.endDate)}
                   </p>
                   {experience.description && (
-                    <p className="text-sm text-gray-700 mt-2">{experience.description}</p>
+                    <p className="text-body-sm text-content-secondary mt-2">{experience.description}</p>
                   )}
                 </div>
-                <div className="flex gap-2 w-full sm:w-auto sm:ml-4">
+                <div className="flex gap-2">
                   <button
                     onClick={() => handleEdit(experience)}
-                    className="flex-1 sm:flex-none px-3 py-1 text-primary-600 hover:text-primary-800 text-sm bg-primary-50 hover:bg-primary-100 rounded transition-colors"
+                    className="flex-1 sm:flex-none px-3 py-1 text-content-brand hover:text-content-accent text-sm bg-surface-brand bg-opacity-10 hover:bg-opacity-20 rounded transition-colors"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(experience.id)}
-                    className="flex-1 sm:flex-none px-3 py-1 text-red-600 hover:text-red-800 text-sm bg-red-50 hover:bg-red-100 rounded transition-colors"
+                    className="flex-1 sm:flex-none px-3 py-1 text-content-danger hover:text-danger-600 text-sm bg-surface-danger bg-opacity-10 hover:bg-opacity-20 rounded transition-colors"
                   >
                     Delete
                   </button>

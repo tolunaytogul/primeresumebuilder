@@ -8,7 +8,7 @@ import { Container, Button, Heading, Text, Card, FadeIn, SlideUp, StaggerContain
 export default function HomePage() {
   return (
     <Layout>
-      <div className="bg-gradient-to-br from-primary-50 to-accent-50">
+      <div className="bg-gradient-to-br from-neutral-100 to-neutral-200">
         {/* Hero Section */}
         <section className="py-20 lg:py-32">
           <Container>
@@ -28,12 +28,12 @@ export default function HomePage() {
               
               <SlideUp delay={0.4}>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="hover-lift">
+                  <Button size="lg" className="hover-lift bg-surface-brand text-content-inverse hover:bg-surface-brand-light">
                     <Link href="/cv-editor">
                       Start Building Resume
                     </Link>
                   </Button>
-                  <Button variant="outline" size="lg" className="hover-lift">
+                  <Button variant="outline" size="lg" className="hover-lift border-ui-brand text-content-brand hover:bg-surface-brand hover:text-content-inverse">
                     <a href="#templates">
                       View Templates
                     </a>
@@ -66,7 +66,7 @@ export default function HomePage() {
                 <StaggerItem key={template.id}>
                   <Card className="group hover-lift transition-all duration-300">
                     {/* Template Preview */}
-                    <div className="p-8 bg-neutral-50">
+                    <div className="p-8 bg-surface-secondary">
                       <TemplatePreview 
                         templateType={template.id} 
                         className="w-full h-32 mx-auto"
@@ -78,7 +78,7 @@ export default function HomePage() {
                       <div className="flex items-center gap-2 mb-3">
                         <Heading level={3} size="lg">{template.name}</Heading>
                         {template.isPremium && (
-                          <span className="px-2 py-1 bg-gradient-to-r from-accent-400 to-accent-500 text-white text-xs font-medium rounded-full">
+                          <span className="px-2 py-1 bg-gradient-to-r from-accent-500 to-accent-600 text-white text-xs font-medium rounded-full">
                             Premium
                           </span>
                         )}
@@ -95,15 +95,15 @@ export default function HomePage() {
                           const getFeatureStyle = (templateId: string) => {
                             switch (templateId) {
                               case 'modern':
-                                return 'bg-primary-100 text-primary-700';
+                                return 'bg-surface-brand bg-opacity-10 text-content-brand';
                               case 'creative':
-                                return 'bg-purple-100 text-purple-700';
+                                return 'bg-accent-100 text-accent-800';
                               case 'classic':
-                                return 'bg-neutral-100 text-neutral-700';
+                                return 'bg-surface-secondary text-content-secondary';
                               case 'minimal':
                                 return 'bg-success-100 text-success-700';
                               default:
-                                return 'bg-neutral-100 text-neutral-700';
+                                return 'bg-surface-secondary text-content-secondary';
                             }
                           };
                           
@@ -118,7 +118,7 @@ export default function HomePage() {
                         })}
                       </div>
                       
-                      <Button variant="secondary" className="w-full">
+                      <Button variant="secondary" className="w-full bg-surface-brand text-content-inverse hover:bg-surface-brand-light">
                         <Link href="/cv-editor">
                           Use This Template
                         </Link>
@@ -131,7 +131,7 @@ export default function HomePage() {
             
             <div className="text-center mt-16">
               <SlideUp delay={0.6}>
-                <Button size="lg" className="hover-lift">
+                <Button size="lg" className="hover-lift bg-surface-brand text-content-inverse hover:bg-surface-brand-light">
                   <Link href="/cv-editor">
                     Start Building Your Resume
                   </Link>
