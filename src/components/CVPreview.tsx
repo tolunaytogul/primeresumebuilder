@@ -28,7 +28,7 @@ export default function CVPreview() {
             <div className="text-4xl lg:text-6xl mb-4">📄</div>
             <h3 className="text-lg lg:text-xl font-medium mb-2">Your resume will appear here</h3>
             <p className="text-sm lg:text-base text-gray-500 mb-4">Start by filling out the form below</p>
-            <div className="inline-flex items-center gap-2 text-xs text-blue-600 bg-blue-50 px-3 py-2 rounded-full">
+            <div className="inline-flex items-center gap-2 text-xs text-primary-600 bg-primary-50 px-3 py-2 rounded-full">
               <span>💡</span>
               <span>Try "Load Sample Data" to see an example</span>
             </div>

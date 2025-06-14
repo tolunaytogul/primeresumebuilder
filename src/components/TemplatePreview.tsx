@@ -15,9 +15,9 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ templateType, classNa
         return (
           <div className="w-full h-full bg-white border border-gray-200 rounded-sm overflow-hidden">
             {/* Header */}
-            <div className="h-3 bg-white border-b-2 border-blue-500 px-1 py-0.5">
+            <div className="h-3 bg-white border-b-2 border-primary-500 px-1 py-0.5">
               <div className="h-0.5 bg-gray-800 w-3/4 mb-0.5"></div>
-              <div className="h-0.5 bg-blue-500 w-1/2"></div>
+              <div className="h-0.5 bg-primary-500 w-1/2"></div>
             </div>
             {/* Content */}
             <div className="p-1 space-y-1">
@@ -26,9 +26,8 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ templateType, classNa
               <div className="h-0.5 bg-gray-300 w-3/4"></div>
               {/* Skills badges */}
               <div className="flex gap-0.5 mt-1">
-                <div className="w-1.5 h-0.5 bg-blue-200 rounded-sm"></div>
-                <div className="w-1.5 h-0.5 bg-purple-200 rounded-sm"></div>
-                <div className="w-1.5 h-0.5 bg-orange-200 rounded-sm"></div>
+                <div className="w-1.5 h-0.5 bg-primary-200 rounded-sm"></div>
+                <div className="w-1.5 h-0.5 bg-accent-200 rounded-sm"></div>
               </div>
             </div>
           </div>
@@ -40,7 +39,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ templateType, classNa
             {/* Header */}
             <div className="h-3 bg-white border-b border-black px-1 py-0.5 text-center">
               <div className="h-0.5 bg-black w-3/4 mx-auto mb-0.5"></div>
-              <div className="h-0.5 bg-gray-600 w-1/2 mx-auto"></div>
+              <div className="h-0.5 bg-accent-200 w-1/2 mx-auto"></div>
             </div>
             {/* Content */}
             <div className="p-1 space-y-1">
@@ -69,20 +68,20 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ templateType, classNa
         return (
           <div className="w-full h-full bg-white rounded-sm overflow-hidden flex">
             {/* Sidebar */}
-            <div className="w-2/5 bg-gradient-to-b from-purple-900 to-purple-800 p-0.5">
+            <div className="w-2/5 bg-gradient-to-b from-accent-900 to-accent-800 p-0.5">
               <div className="space-y-0.5">
                 <div className="h-0.5 bg-white w-3/4"></div>
-                <div className="h-0.5 bg-purple-200 w-1/2"></div>
+                <div className="h-0.5 bg-accent-200 w-1/2"></div>
                 {/* Progress bars */}
                 <div className="space-y-0.5 mt-1">
-                  <div className="w-full h-0.5 bg-purple-700 rounded-full">
-                    <div className="w-4/5 h-0.5 bg-purple-300 rounded-full"></div>
+                  <div className="w-full h-0.5 bg-accent-700 rounded-full">
+                    <div className="w-4/5 h-0.5 bg-accent-300 rounded-full"></div>
                   </div>
-                  <div className="w-full h-0.5 bg-purple-700 rounded-full">
-                    <div className="w-3/5 h-0.5 bg-purple-300 rounded-full"></div>
+                  <div className="w-full h-0.5 bg-accent-700 rounded-full">
+                    <div className="w-3/5 h-0.5 bg-accent-300 rounded-full"></div>
                   </div>
-                  <div className="w-full h-0.5 bg-purple-700 rounded-full">
-                    <div className="w-4/5 h-0.5 bg-purple-300 rounded-full"></div>
+                  <div className="w-full h-0.5 bg-accent-700 rounded-full">
+                    <div className="w-4/5 h-0.5 bg-accent-300 rounded-full"></div>
                   </div>
                 </div>
               </div>
@@ -90,7 +89,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({ templateType, classNa
             {/* Main content */}
             <div className="w-3/5 p-0.5">
               <div className="space-y-0.5">
-                <div className="h-0.5 bg-purple-900 w-3/4 border-l-2 border-purple-400 pl-0.5"></div>
+                <div className="h-0.5 bg-accent-900 w-3/4 border-l-2 border-accent-400 pl-0.5"></div>
                 <div className="h-0.5 bg-gray-400 w-full"></div>
                 <div className="h-0.5 bg-gray-400 w-4/5"></div>
                 <div className="h-0.5 bg-gray-400 w-3/4"></div>

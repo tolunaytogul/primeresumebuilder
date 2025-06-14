@@ -21,9 +21,9 @@ const ModernWebTemplate: React.FC<ModernWebTemplateProps> = ({ cvData }) => {
       case 'Beginner':
         return 'bg-gray-100 text-gray-600 border-gray-300';
       case 'Intermediate':
-        return 'bg-blue-100 text-blue-700 border-blue-300';
-      case 'Advanced':
-        return 'bg-purple-100 text-purple-700 border-purple-300';
+            return 'bg-primary-100 text-primary-700 border-primary-300';
+  case 'Advanced':
+    return 'bg-accent-100 text-accent-700 border-accent-300';
       case 'Expert':
         return 'bg-orange-100 text-orange-700 border-orange-300';
       default:
@@ -34,11 +34,11 @@ const ModernWebTemplate: React.FC<ModernWebTemplateProps> = ({ cvData }) => {
   return (
     <div className="bg-white p-4 lg:p-8 font-sans text-sm leading-relaxed">
       {/* Header */}
-      <div className="mb-8 pb-6 border-b-4 border-blue-500">
+              <div className="mb-8 pb-6 border-b-4 border-primary-500">
         <h1 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-2">
           {personalInfo.name || 'Full Name'}
         </h1>
-        <h2 className="text-lg lg:text-xl text-blue-600 font-bold mb-4">
+                  <h2 className="text-lg lg:text-xl text-primary-600 font-bold mb-4">
           {personalInfo.title || 'Job Title'}
         </h2>
         <div className="flex flex-wrap gap-4 text-sm text-gray-600">
@@ -79,7 +79,7 @@ const ModernWebTemplate: React.FC<ModernWebTemplateProps> = ({ cvData }) => {
                     <h4 className="font-bold text-gray-800 text-sm">
                       {exp.position}
                     </h4>
-                    <p className="text-blue-600 font-bold text-sm mt-1">
+                    <p className="text-primary-600 font-bold text-sm mt-1">
                       {exp.company}
                     </p>
                   </div>

@@ -10,7 +10,7 @@ export default function SaveStatusIndicator() {
     switch (saveStatus) {
       case 'saving':
         return (
-          <div className="w-3 h-3 border border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-3 h-3 border border-primary-500 border-t-transparent rounded-full animate-spin"></div>
         );
       case 'saved':
         return <span className="text-green-500">✓</span>;
@@ -37,7 +37,7 @@ export default function SaveStatusIndicator() {
   const getStatusColor = () => {
     switch (saveStatus) {
       case 'saving':
-        return 'text-blue-600';
+        return 'text-primary-600';
       case 'saved':
         return 'text-green-600';
       case 'error':

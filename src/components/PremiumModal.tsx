@@ -45,7 +45,7 @@ const PremiumModal: React.FC = () => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="relative bg-gradient-to-r from-purple-600 to-blue-600 text-white p-8 rounded-t-2xl">
+        <div className="relative bg-gradient-to-r from-accent-600 to-primary-600 text-white p-8 rounded-t-2xl">
           <button
             onClick={() => setShowUpgradeModal(false)}
             className="absolute top-4 right-4 text-white hover:text-gray-200 transition-colors"
@@ -60,7 +60,7 @@ const PremiumModal: React.FC = () => {
               <span className="text-2xl">👑</span>
             </div>
             <h2 className="text-3xl font-bold mb-2">Upgrade to Premium</h2>
-            <p className="text-purple-100">Unlock all features and create stunning resumes</p>
+            <p className="text-accent-100">Unlock all features and create stunning resumes</p>
           </div>
         </div>
 
@@ -68,10 +68,10 @@ const PremiumModal: React.FC = () => {
         <div className="p-8">
           {/* Pricing */}
           <div className="text-center mb-8">
-            <div className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-2xl p-6 mb-6">
+            <div className="inline-block bg-gradient-to-r from-accent-600 to-primary-600 text-white rounded-2xl p-6 mb-6">
               <div className="text-4xl font-bold mb-2">$9.99</div>
-              <div className="text-purple-100">One-time payment</div>
-              <div className="text-sm text-purple-200 mt-1">Lifetime access</div>
+              <div className="text-accent-100">One-time payment</div>
+              <div className="text-sm text-accent-200 mt-1">Lifetime access</div>
             </div>
             
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
@@ -101,7 +101,7 @@ const PremiumModal: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={upgradeToPremium}
-              className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200 transform hover:scale-105"
+              className="flex-1 bg-gradient-to-r from-accent-600 to-primary-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-accent-700 hover:to-primary-700 transition-all duration-200 transform hover:scale-105"
             >
               🚀 Upgrade Now - $9.99
             </button>
@@ -123,13 +123,13 @@ const PremiumModal: React.FC = () => {
                 <span>Secure Payment</span>
               </div>
               <div className="flex items-center gap-1">
-                <svg className="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>Instant Access</span>
               </div>
               <div className="flex items-center gap-1">
-                <svg className="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 text-accent-500" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span>No Subscription</span>

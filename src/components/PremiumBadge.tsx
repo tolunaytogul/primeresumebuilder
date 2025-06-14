@@ -16,7 +16,7 @@ const PremiumBadge: React.FC<PremiumBadgeProps> = ({
 
   if (isPremium) {
     return (
-      <div className={`inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-medium rounded-full ${className}`}>
+      <div className={`inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r from-accent-600 to-primary-600 text-white text-sm font-medium rounded-full ${className}`}>
         <span className="text-yellow-300">👑</span>
         <span>Premium</span>
       </div>

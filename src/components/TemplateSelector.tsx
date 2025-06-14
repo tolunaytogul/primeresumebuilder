@@ -35,7 +35,7 @@ export default function TemplateSelector() {
         className="flex items-center gap-3 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:border-gray-400 transition-colors w-full sm:w-auto"
       >
         <div className="flex items-center gap-2">
-          <div className="w-8 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded shadow-sm flex items-center justify-center">
+          <div className="w-8 h-10 bg-gradient-to-br from-primary-500 to-primary-600 rounded shadow-sm flex items-center justify-center">
             <span className="text-white text-xs font-bold">CV</span>
           </div>
           <div className="text-left">
@@ -65,7 +65,7 @@ export default function TemplateSelector() {
                   onClick={() => handleTemplateSelect(template.id)}
                   className={`flex items-start gap-4 p-3 rounded-lg border-2 transition-all text-left hover:shadow-md ${
                     selectedTemplate === template.id
-                      ? 'border-blue-500 bg-blue-50 shadow-md'
+                      ? 'border-primary-500 bg-primary-50 shadow-md'
                       : template.isPremium && !isPremium
                       ? 'border-gray-200 hover:border-orange-300 hover:bg-orange-50'
                       : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
@@ -94,7 +94,7 @@ export default function TemplateSelector() {
                         </span>
                       )}
                       {selectedTemplate === template.id && (
-                        <span className="text-blue-500">
+                        <span className="text-primary-500">
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
@@ -107,8 +107,8 @@ export default function TemplateSelector() {
                     <div className="mt-2 flex flex-wrap gap-1">
                       {template.id === 'modern' && (
                         <>
-                          <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded">Professional</span>
-                          <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded">Skill Badges</span>
+                                        <span className="px-2 py-0.5 bg-primary-100 text-primary-700 text-xs rounded">Professional</span>
+              <span className="px-2 py-0.5 bg-primary-100 text-primary-700 text-xs rounded">Skill Badges</span>
                         </>
                       )}
                       {template.id === 'classic' && (
@@ -119,8 +119,8 @@ export default function TemplateSelector() {
                       )}
                       {template.id === 'creative' && (
                         <>
-                          <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded">Two-Column</span>
-                          <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded">Progress Bars</span>
+                                        <span className="px-2 py-0.5 bg-accent-100 text-accent-700 text-xs rounded">Two-Column</span>
+              <span className="px-2 py-0.5 bg-accent-100 text-accent-700 text-xs rounded">Progress Bars</span>
                         </>
                       )}
                       {template.id === 'minimal' && (

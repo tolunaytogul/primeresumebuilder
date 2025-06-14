@@ -97,7 +97,7 @@ export default function ExperienceForm() {
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="w-full sm:w-auto px-4 py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                            className="w-full sm:w-auto px-4 py-2 text-sm bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
           >
             + Add Experience
           </button>
@@ -122,7 +122,7 @@ export default function ExperienceForm() {
                 value={formData.company}
                 onChange={(e) => handleInputChange('company', e.target.value)}
                 placeholder="e.g. Google, Microsoft"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
             </div>
 
@@ -136,7 +136,7 @@ export default function ExperienceForm() {
                 value={formData.position}
                 onChange={(e) => handleInputChange('position', e.target.value)}
                 placeholder="e.g. Software Engineer"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
             </div>
 
@@ -149,7 +149,7 @@ export default function ExperienceForm() {
                 type="month"
                 value={formData.startDate}
                 onChange={(e) => handleInputChange('startDate', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
             </div>
 
@@ -163,7 +163,7 @@ export default function ExperienceForm() {
                 value={formData.endDate}
                 onChange={(e) => handleInputChange('endDate', e.target.value)}
                 disabled={formData.isCurrentJob}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:bg-gray-100"
               />
             </div>
           </div>
@@ -191,7 +191,7 @@ export default function ExperienceForm() {
               onChange={(e) => handleInputChange('description', e.target.value)}
               placeholder="Describe your responsibilities and achievements..."
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
             />
           </div>
 
@@ -199,7 +199,7 @@ export default function ExperienceForm() {
           <div className="flex flex-col sm:flex-row gap-2 mt-4">
             <button
               onClick={editingId ? handleUpdate : handleAdd}
-              className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
             >
               {editingId ? 'Update' : 'Add'} Experience
             </button>
@@ -227,7 +227,7 @@ export default function ExperienceForm() {
               <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
                 <div className="flex-1">
                   <h4 className="font-semibold text-gray-800">{experience.position}</h4>
-                  <p className="text-blue-600 font-medium">{experience.company}</p>
+                  <p className="text-primary-600 font-medium">{experience.company}</p>
                   <p className="text-sm text-gray-500">
                     {experience.startDate && new Date(experience.startDate + '-01').toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} - {experience.isCurrentJob ? 'Present' : (experience.endDate && new Date(experience.endDate + '-01').toLocaleDateString('en-US', { month: 'short', year: 'numeric' }))}
                   </p>
@@ -238,7 +238,7 @@ export default function ExperienceForm() {
                 <div className="flex gap-2 w-full sm:w-auto sm:ml-4">
                   <button
                     onClick={() => handleEdit(experience)}
-                    className="flex-1 sm:flex-none px-3 py-1 text-blue-600 hover:text-blue-800 text-sm bg-blue-50 hover:bg-blue-100 rounded transition-colors"
+                    className="flex-1 sm:flex-none px-3 py-1 text-primary-600 hover:text-primary-800 text-sm bg-primary-50 hover:bg-primary-100 rounded transition-colors"
                   >
                     Edit
                   </button>

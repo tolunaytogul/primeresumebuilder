@@ -75,8 +75,8 @@ export default function SkillsForm() {
   const getLevelColor = (level: string) => {
     switch (level) {
       case 'Beginner': return 'bg-gray-100 text-gray-800';
-      case 'Intermediate': return 'bg-blue-100 text-blue-800';
-      case 'Advanced': return 'bg-purple-100 text-purple-800';
+      case 'Intermediate': return 'bg-primary-100 text-primary-800';
+      case 'Advanced': return 'bg-accent-100 text-accent-800';
       case 'Expert': return 'bg-orange-100 text-orange-800';
       default: return 'bg-gray-100 text-gray-800';
     }
@@ -91,7 +91,7 @@ export default function SkillsForm() {
         {!isAdding && (
           <button
             onClick={() => setIsAdding(true)}
-            className="w-full sm:w-auto px-4 py-2 text-sm bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+            className="w-full sm:w-auto px-4 py-2 text-sm bg-secondary-600 text-white rounded-md hover:bg-secondary-700 transition-colors"
           >
             + Add Skill
           </button>
@@ -116,7 +116,7 @@ export default function SkillsForm() {
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 placeholder="e.g. JavaScript, Photoshop, Leadership"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-500"
               />
             </div>
 
@@ -128,7 +128,7 @@ export default function SkillsForm() {
               <select
                 value={formData.level}
                 onChange={(e) => handleInputChange('level', e.target.value as Skill['level'])}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-500"
               >
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
@@ -142,7 +142,7 @@ export default function SkillsForm() {
           <div className="flex flex-col sm:flex-row gap-2 mt-4">
             <button
               onClick={editingId ? handleUpdate : handleAdd}
-              className="w-full sm:w-auto px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700 transition-colors"
             >
               {editingId ? 'Update' : 'Add'} Skill
             </button>
@@ -179,7 +179,7 @@ export default function SkillsForm() {
                   <div className="flex gap-1">
                     <button
                       onClick={() => handleEdit(skill)}
-                      className="text-purple-600 hover:text-purple-800 text-xs underline"
+                      className="text-secondary-600 hover:text-secondary-800 text-xs underline"
                     >
                       Edit
                     </button>
