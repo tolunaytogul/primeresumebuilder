@@ -74,18 +74,18 @@ export default function SkillsForm() {
   // Get level color
   const getLevelColor = (level: string) => {
     switch (level) {
-      case 'Beginner': return 'bg-gray-100 text-gray-800';
+      case 'Beginner': return 'bg-surface-secondary text-content-tertiary';
       case 'Intermediate': return 'bg-primary-100 text-primary-800';
       case 'Advanced': return 'bg-accent-100 text-accent-800';
-      case 'Expert': return 'bg-orange-100 text-orange-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'Expert': return 'bg-success-100 text-success-800';
+      default: return 'bg-surface-secondary text-content-tertiary';
     }
   };
 
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0">
-        <h3 className="text-lg font-semibold text-gray-800">
+        <h3 className="text-lg font-semibold text-content-primary">
           Skills
         </h3>
         {!isAdding && (
@@ -100,15 +100,15 @@ export default function SkillsForm() {
 
       {/* Add/Edit Form */}
       {isAdding && (
-        <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-          <h4 className="font-medium text-gray-800 mb-4">
+        <div className="border border-ui-primary rounded-lg p-4 bg-surface-primary">
+          <h4 className="font-medium text-content-primary mb-4">
             {editingId ? 'Edit Skill' : 'Add New Skill'}
           </h4>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Skill Name */}
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-2">
+              <label className="block text-body-sm font-medium text-content-tertiary mb-2">
                 Skill Name *
               </label>
               <input
@@ -116,19 +116,19 @@ export default function SkillsForm() {
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 placeholder="e.g. JavaScript, Photoshop, Leadership"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-500"
+                className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-500"
               />
             </div>
 
             {/* Skill Level */}
             <div>
-              <label className="block text-sm font-medium text-gray-600 mb-2">
+              <label className="block text-body-sm font-medium text-content-tertiary mb-2">
                 Level *
               </label>
               <select
                 value={formData.level}
                 onChange={(e) => handleInputChange('level', e.target.value as Skill['level'])}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-500"
+                className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-500"
               >
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
@@ -148,7 +148,7 @@ export default function SkillsForm() {
             </button>
             <button
               onClick={resetForm}
-              className="w-full sm:w-auto px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
+              className="w-full sm:w-auto px-4 py-2 border border-ui-secondary text-content-secondary rounded-md hover:bg-surface-secondary transition-colors"
             >
               Cancel
             </button>
@@ -159,7 +159,7 @@ export default function SkillsForm() {
       {/* Skills List */}
       <div className="space-y-4">
         {skills.length === 0 ? (
-          <div className="text-center text-gray-500 py-8">
+          <div className="text-center text-content-quaternary py-8">
             <div className="text-4xl mb-2">🛠️</div>
             <p>No skills added yet</p>
             <p className="text-sm mt-1">Click "Add Skill" to get started</p>
@@ -185,7 +185,7 @@ export default function SkillsForm() {
                     </button>
                     <button
                       onClick={() => handleDelete(skill.id)}
-                      className="text-red-600 hover:text-red-800 text-xs underline"
+                      className="text-content-danger hover:text-danger-700 text-xs underline"
                     >
                       ×
                     </button>
@@ -196,7 +196,7 @@ export default function SkillsForm() {
 
             {/* Skills Summary */}
             <div className="border-t pt-4">
-              <div className="text-xs sm:text-sm text-gray-600 flex flex-wrap gap-2 sm:gap-4">
+              <div className="text-xs sm:text-sm text-content-tertiary flex flex-wrap gap-2 sm:gap-4">
                 <span>Total: <strong>{skills.length}</strong> skills</span>
                 <span>Expert: <strong>{skills.filter(s => s.level === 'Expert').length}</strong></span>
                 <span>Advanced: <strong>{skills.filter(s => s.level === 'Advanced').length}</strong></span>

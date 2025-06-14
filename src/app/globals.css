@@ -431,3 +431,142 @@ html, body {
     min-width: 44px;
   }
 }
+
+/* Semantic Color Utilities */
+.text-content-primary {
+  color: var(--neutral-900);
+}
+
+.text-content-secondary {
+  color: var(--neutral-700);
+}
+
+.text-content-tertiary {
+  color: var(--neutral-600);
+}
+
+.text-content-quaternary {
+  color: var(--neutral-500);
+}
+
+.text-content-disabled {
+  color: var(--neutral-400);
+}
+
+.text-content-inverse {
+  color: var(--neutral-50);
+}
+
+.text-content-brand {
+  color: var(--primary-600);
+}
+
+.text-content-success {
+  color: var(--success-600);
+}
+
+.text-content-warning {
+  color: var(--accent-600);
+}
+
+.text-content-danger {
+  color: var(--danger-600);
+}
+
+.bg-surface-primary {
+  background-color: var(--neutral-50);
+}
+
+.bg-surface-secondary {
+  background-color: var(--neutral-100);
+}
+
+.bg-surface-tertiary {
+  background-color: var(--neutral-200);
+}
+
+.bg-surface-inverse {
+  background-color: var(--neutral-900);
+}
+
+.bg-surface-brand {
+  background-color: var(--primary-50);
+}
+
+.bg-surface-success {
+  background-color: var(--success-50);
+}
+
+.bg-surface-warning {
+  background-color: var(--accent-50);
+}
+
+.bg-surface-danger {
+  background-color: var(--danger-50);
+}
+
+.border-ui-primary {
+  border-color: var(--neutral-200);
+}
+
+.border-ui-secondary {
+  border-color: var(--neutral-300);
+}
+
+.border-ui-tertiary {
+  border-color: var(--neutral-400);
+}
+
+.border-ui-brand {
+  border-color: var(--primary-200);
+}
+
+.border-ui-success {
+  border-color: var(--success-200);
+}
+
+.border-ui-warning {
+  border-color: var(--accent-200);
+}
+
+.border-ui-danger {
+  border-color: var(--danger-200);
+}
+
+/* Interactive States */
+.hover\:text-content-brand:hover {
+  color: var(--primary-700);
+}
+
+.hover\:text-content-danger:hover {
+  color: var(--danger-700);
+}
+
+.hover\:bg-surface-secondary:hover {
+  background-color: var(--neutral-100);
+}
+
+.hover\:bg-surface-tertiary:hover {
+  background-color: var(--neutral-200);
+}
+
+.hover\:border-ui-secondary:hover {
+  border-color: var(--neutral-300);
+}
+
+.hover\:border-ui-tertiary:hover {
+  border-color: var(--neutral-400);
+}
+
+/* Focus States for Accessibility */
+.focus\:border-ui-brand:focus {
+  border-color: var(--primary-500);
+}
+
+.focus\:ring-brand:focus {
+  --tw-ring-color: var(--primary-500);
+}
+
+.focus\:ring-danger:focus {
+  --tw-ring-color: var(--danger-500);
+}

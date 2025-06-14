@@ -33,8 +33,8 @@ export default function CVForm() {
 
   const getInputClassName = (field: string) => {
     const baseClass = "w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:border-transparent transition-colors";
-    const errorClass = "border-red-300 focus:ring-red-500";
-    const normalClass = "border-gray-300 focus:ring-blue-500";
+    const errorClass = "border-ui-danger focus:ring-danger";
+    const normalClass = "border-ui-secondary focus:ring-brand";
     
     return `${baseClass} ${errors[field] ? errorClass : normalClass}`;
   };
@@ -42,14 +42,14 @@ export default function CVForm() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-heading-sm text-gray-800 mb-4">
+        <h3 className="text-heading-sm text-content-primary mb-4">
           Personal Information
         </h3>
         
         <div className="grid grid-cols-1 gap-4">
           {/* Ad Soyad */}
           <div>
-            <label htmlFor="name" className="block text-body-sm font-medium text-gray-600 mb-2">
+            <label htmlFor="name" className="block text-body-sm font-medium text-content-tertiary mb-2">
               Full Name *
             </label>
             <input
@@ -62,8 +62,8 @@ export default function CVForm() {
               className={getInputClassName('name')}
             />
             {errors.name && (
-              <p className="mt-1 text-caption text-red-600 flex items-center gap-1">
-                <span className="text-red-500">⚠</span>
+              <p className="mt-1 text-caption text-content-danger flex items-center gap-1">
+                <span className="text-danger-500">⚠</span>
                 {errors.name}
               </p>
             )}
@@ -71,7 +71,7 @@ export default function CVForm() {
 
           {/* Unvan */}
           <div>
-            <label htmlFor="title" className="block text-body-sm font-medium text-gray-600 mb-2">
+            <label htmlFor="title" className="block text-body-sm font-medium text-content-tertiary mb-2">
               Job Title *
             </label>
             <input
@@ -84,8 +84,8 @@ export default function CVForm() {
               className={getInputClassName('title')}
             />
             {errors.title && (
-              <p className="mt-1 text-caption text-red-600 flex items-center gap-1">
-                <span className="text-red-500">⚠</span>
+              <p className="mt-1 text-caption text-content-danger flex items-center gap-1">
+                <span className="text-danger-500">⚠</span>
                 {errors.title}
               </p>
             )}
@@ -93,7 +93,7 @@ export default function CVForm() {
 
           {/* E-posta */}
           <div>
-            <label htmlFor="email" className="block text-body-sm font-medium text-gray-600 mb-2">
+            <label htmlFor="email" className="block text-body-sm font-medium text-content-tertiary mb-2">
               Email *
             </label>
             <input
@@ -106,8 +106,8 @@ export default function CVForm() {
               className={getInputClassName('email')}
             />
             {errors.email && (
-              <p className="mt-1 text-caption text-red-600 flex items-center gap-1">
-                <span className="text-red-500">⚠</span>
+              <p className="mt-1 text-caption text-content-danger flex items-center gap-1">
+                <span className="text-danger-500">⚠</span>
                 {errors.email}
               </p>
             )}
@@ -115,7 +115,7 @@ export default function CVForm() {
 
           {/* Telefon */}
           <div>
-            <label htmlFor="phone" className="block text-body-sm font-medium text-gray-600 mb-2">
+            <label htmlFor="phone" className="block text-body-sm font-medium text-content-tertiary mb-2">
               Phone
             </label>
             <input
@@ -124,13 +124,13 @@ export default function CVForm() {
               value={personalInfo.phone}
               onChange={(e) => handleInputChange('phone', e.target.value)}
               placeholder="+1 (555) 123-4567"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
             />
           </div>
 
           {/* Konum */}
           <div>
-            <label htmlFor="location" className="block text-body-sm font-medium text-gray-600 mb-2">
+            <label htmlFor="location" className="block text-body-sm font-medium text-content-tertiary mb-2">
               Location
             </label>
             <input
@@ -139,13 +139,13 @@ export default function CVForm() {
               value={personalInfo.location}
               onChange={(e) => handleInputChange('location', e.target.value)}
               placeholder="City, Country"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
             />
           </div>
 
           {/* Özet */}
           <div>
-            <label htmlFor="summary" className="block text-body-sm font-medium text-gray-600 mb-2">
+            <label htmlFor="summary" className="block text-body-sm font-medium text-content-tertiary mb-2">
               Professional Summary
             </label>
             <textarea
@@ -154,7 +154,7 @@ export default function CVForm() {
               onChange={(e) => handleInputChange('summary', e.target.value)}
               placeholder="Write a brief professional summary about yourself..."
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              className="w-full px-3 py-2 border border-ui-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent resize-none"
             />
           </div>
         </div>
