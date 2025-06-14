@@ -36,9 +36,9 @@ export default function CVEditorPage() {
         <FadeIn>
           <div className="flex flex-col gap-4 mb-6 lg:mb-8">
             {/* Top Row - Title and Navigation */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
-              <div className="flex-1">
-                <div className="flex items-center gap-4 mb-2">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-4 mb-2 flex-wrap">
                   <Heading level={1} size="3xl" className="text-gradient">
                     Resume Builder
                   </Heading>
@@ -47,7 +47,7 @@ export default function CVEditorPage() {
                 </div>
                 <Text color="muted">Create your professional resume</Text>
               </div>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 flex-shrink-0">
                 <TemplateSelector />
                 <Button variant="ghost" size="sm" className="hover-lift">
                   <Link href="/">
@@ -145,10 +145,10 @@ export default function CVEditorPage() {
 
         {/* Desktop Layout: Side by Side */}
         <div className="hidden lg:block">
-          <div className="flex gap-8 mt-8">
+          <div className="grid lg:grid-cols-2 gap-8 mt-8">
             {/* Form Section */}
             <SlideUp delay={0.2}>
-              <div className="w-1/2">
+              <div className="w-full">
                 <div className="mb-4">
                   <Heading level={2} size="lg" className="mb-2">✏️ Edit Your Resume</Heading>
                   <Text size="sm" color="muted">Fill in your information</Text>
@@ -161,7 +161,7 @@ export default function CVEditorPage() {
             
             {/* Preview Section */}
             <SlideUp delay={0.4}>
-              <div className="w-1/2">
+              <div className="w-full">
                 <div className="mb-4">
                   <Heading level={2} size="lg" className="mb-2">📋 Live Preview</Heading>
                   <Text size="sm" color="muted">See your changes in real-time</Text>

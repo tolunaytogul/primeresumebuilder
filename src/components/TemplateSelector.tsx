@@ -55,7 +55,7 @@ export default function TemplateSelector() {
 
       {/* Template Selection Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[400px]">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 w-full sm:min-w-[400px] sm:w-auto">
           <div className="p-4">
             <h3 className="text-sm font-semibold text-gray-900 mb-4">Choose Template</h3>
             <div className="grid grid-cols-1 gap-3">
@@ -86,22 +86,22 @@ export default function TemplateSelector() {
                   
                   {/* Template Info */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-2">
-                      <h4 className="font-semibold text-gray-900 text-sm">{template.name}</h4>
+                    <div className="flex items-center gap-2 mb-2 flex-wrap">
+                      <h4 className="font-semibold text-gray-900 text-sm truncate">{template.name}</h4>
                       {template.isPremium && (
-                        <span className="px-2 py-0.5 bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-medium rounded-full">
+                        <span className="px-2 py-0.5 bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-medium rounded-full flex-shrink-0">
                           Premium
                         </span>
                       )}
                       {selectedTemplate === template.id && (
-                        <span className="text-primary-500">
+                        <span className="text-primary-500 flex-shrink-0">
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 leading-relaxed">{template.description}</p>
+                    <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{template.description}</p>
                     
                     {/* Template Features */}
                     <div className="mt-2 flex flex-wrap gap-1">
