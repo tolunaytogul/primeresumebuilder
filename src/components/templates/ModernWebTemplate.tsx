@@ -32,18 +32,18 @@ const ModernWebTemplate: React.FC<ModernWebTemplateProps> = ({ cvData }) => {
   };
 
   return (
-    <div className="bg-white p-4 sm:p-6 lg:p-8 font-sans text-sm leading-relaxed">
+    <div className="bg-white p-4 sm:p-6 lg:p-8 font-sans leading-relaxed">
       {/* Header */}
       <div className="text-center mb-6 sm:mb-8">
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-2 break-words">
+        <h1 className="text-heading-xl text-gray-800 mb-2 break-words">
           {personalInfo.name || 'Full Name'}
         </h1>
-        <h2 className="text-base sm:text-lg lg:text-xl text-primary-600 font-bold mb-3 sm:mb-4 break-words">
+        <h2 className="text-heading-md text-primary-600 mb-3 sm:mb-4 break-words">
           {personalInfo.title || 'Job Title'}
         </h2>
         
         {/* Contact Info */}
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-gray-600">
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-6 text-caption text-gray-600">
           {personalInfo.email && (
             <div className="flex items-center gap-1 sm:gap-2">
               <svg className="w-3 h-3 sm:w-4 sm:h-4 text-primary-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -75,10 +75,10 @@ const ModernWebTemplate: React.FC<ModernWebTemplateProps> = ({ cvData }) => {
       {/* Professional Summary */}
       {personalInfo.summary && (
         <div className="mb-6 sm:mb-8">
-          <h3 className="text-base sm:text-lg font-bold text-primary-600 mb-3 sm:mb-4 uppercase tracking-wide border-b-2 border-primary-200 pb-2">
+          <h3 className="text-overline text-primary-600 mb-3 sm:mb-4 border-b-2 border-primary-200 pb-2">
             Professional Summary
           </h3>
-          <p className="text-gray-700 leading-relaxed text-sm sm:text-base">
+          <p className="text-body-md text-gray-700">
             {personalInfo.summary}
           </p>
         </div>
@@ -87,7 +87,7 @@ const ModernWebTemplate: React.FC<ModernWebTemplateProps> = ({ cvData }) => {
       {/* Work Experience */}
       {experiences.length > 0 && (
         <div className="mb-6 sm:mb-8">
-          <h3 className="text-base sm:text-lg font-bold text-primary-600 mb-4 sm:mb-6 uppercase tracking-wide border-b-2 border-primary-200 pb-2">
+          <h3 className="text-overline text-primary-600 mb-4 sm:mb-6 border-b-2 border-primary-200 pb-2">
             Work Experience
           </h3>
           <div className="space-y-4 sm:space-y-6">
@@ -95,19 +95,19 @@ const ModernWebTemplate: React.FC<ModernWebTemplateProps> = ({ cvData }) => {
               <div key={exp.id} className="border-l-4 border-primary-200 pl-3 sm:pl-4">
                 <div className="flex flex-col gap-1 sm:gap-2 mb-2">
                   <div className="flex-1">
-                    <h4 className="font-bold text-gray-800 text-sm sm:text-base break-words">
+                    <h4 className="text-heading-sm text-gray-800 break-words">
                       {exp.position}
                     </h4>
-                    <p className="text-primary-600 font-bold text-xs sm:text-sm mt-1 break-words">
+                    <p className="text-body-sm text-primary-600 font-semibold mt-1 break-words">
                       {exp.company}
                     </p>
                   </div>
-                  <div className="text-gray-600 text-xs font-bold">
+                  <div className="text-caption text-gray-600 font-medium">
                     {formatDate(exp.startDate)} - {exp.isCurrentJob ? 'Present' : formatDate(exp.endDate)}
                   </div>
                 </div>
                 {exp.description && (
-                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-body-sm text-gray-600">
                     {exp.description}
                   </p>
                 )}
@@ -120,7 +120,7 @@ const ModernWebTemplate: React.FC<ModernWebTemplateProps> = ({ cvData }) => {
       {/* Education */}
       {education.length > 0 && (
         <div className="mb-6 sm:mb-8">
-          <h3 className="text-base sm:text-lg font-bold text-primary-600 mb-4 sm:mb-6 uppercase tracking-wide border-b-2 border-primary-200 pb-2">
+          <h3 className="text-overline text-primary-600 mb-4 sm:mb-6 border-b-2 border-primary-200 pb-2">
             Education
           </h3>
           <div className="space-y-4 sm:space-y-6">
@@ -128,19 +128,19 @@ const ModernWebTemplate: React.FC<ModernWebTemplateProps> = ({ cvData }) => {
               <div key={edu.id} className="border-l-4 border-primary-200 pl-3 sm:pl-4">
                 <div className="flex flex-col gap-1 sm:gap-2">
                   <div className="flex-1">
-                    <h4 className="font-bold text-gray-800 text-sm sm:text-base break-words">
+                    <h4 className="text-heading-sm text-gray-800 break-words">
                       {edu.degree}
                     </h4>
-                    <p className="text-primary-600 font-bold text-xs sm:text-sm mt-1 break-words">
+                    <p className="text-body-sm text-primary-600 font-semibold mt-1 break-words">
                       {edu.school}
                     </p>
                     {edu.field && (
-                      <p className="text-gray-600 text-xs sm:text-sm break-words">
+                      <p className="text-body-sm text-gray-600 break-words">
                         {edu.field}
                       </p>
                     )}
                   </div>
-                  <div className="text-gray-600 text-xs">
+                  <div className="text-caption text-gray-600">
                     {formatDate(edu.startDate)} - {formatDate(edu.endDate)}
                     {edu.gpa && <span className="ml-2">• GPA: {edu.gpa}</span>}
                   </div>
@@ -154,14 +154,14 @@ const ModernWebTemplate: React.FC<ModernWebTemplateProps> = ({ cvData }) => {
       {/* Skills */}
       {skills.length > 0 && (
         <div className="mb-6 sm:mb-8">
-          <h3 className="text-base sm:text-lg font-bold text-primary-600 mb-3 sm:mb-4 uppercase tracking-wide border-b-2 border-primary-200 pb-2">
+          <h3 className="text-overline text-primary-600 mb-3 sm:mb-4 border-b-2 border-primary-200 pb-2">
             Skills
           </h3>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {skills.map((skill) => (
               <span
                 key={skill.id}
-                                 className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium border ${getSkillBadgeClass(skill.level)} break-words`}
+                className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-caption border ${getSkillBadgeClass(skill.level)} break-words`}
               >
                 {skill.name} • {skill.level}
               </span>
