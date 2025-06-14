@@ -87,8 +87,8 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({ cvData }) => {
         disabled={isGenerating || !formValid}
         className={`w-full sm:w-auto px-6 py-3 font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 min-h-[44px] touch-manipulation ${
           formValid 
-            ? 'bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white shadow-sm hover:shadow-md' 
-            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            ? 'bg-surface-brand hover:bg-surface-brand-light disabled:bg-opacity-60 text-content-inverse shadow-sm hover:shadow-md' 
+            : 'bg-surface-tertiary text-content-disabled cursor-not-allowed'
         }`}
       >
         {isGenerating ? (
@@ -109,7 +109,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({ cvData }) => {
       </button>
       
       {!formValid && (
-        <p className="text-xs text-gray-500 text-center sm:text-left">
+        <p className="text-xs text-content-tertiary text-center sm:text-left">
           <span className="hidden sm:inline">Complete required fields (Name, Title, Email) to download</span>
           <span className="sm:hidden">Complete required fields to download</span>
         </p>

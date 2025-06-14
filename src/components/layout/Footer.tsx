@@ -46,7 +46,7 @@ export function Footer({ className }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className={cn('bg-neutral-50 border-t border-neutral-200', className)}>
+    <footer className={cn('bg-surface-secondary border-t border-ui-primary', className)}>
       <Container>
         <div className="py-12">
           {/* Main Footer Content */}
@@ -54,16 +54,16 @@ export function Footer({ className }: FooterProps) {
             {/* Brand Section */}
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-600 rounded-lg flex items-center justify-center">
                   <Text as="span" size="sm" weight="bold" className="text-white">
                     PR
                   </Text>
                 </div>
-                <Text as="span" size="lg" weight="bold" color="primary">
+                <Text as="span" size="lg" weight="bold" className="text-content-brand">
                   PrimeResume
                 </Text>
               </div>
-              <Text color="muted" className="max-w-sm">
+              <Text className="max-w-sm text-content-secondary">
                 Create professional resumes with AI-powered suggestions and beautiful templates. 
                 Stand out from the crowd and land your dream job.
               </Text>
@@ -71,7 +71,7 @@ export function Footer({ className }: FooterProps) {
 
             {/* Quick Links */}
             <div className="space-y-4">
-              <Text weight="semibold" color="default">
+              <Text weight="semibold" className="text-content-primary">
                 Quick Links
               </Text>
               <nav className="flex flex-col space-y-2">
@@ -79,7 +79,7 @@ export function Footer({ className }: FooterProps) {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="text-neutral-600 hover:text-primary transition-fast text-sm"
+                    className="text-content-tertiary hover:text-content-brand transition-fast text-sm"
                   >
                     {link.name}
                   </Link>
@@ -89,7 +89,7 @@ export function Footer({ className }: FooterProps) {
 
             {/* Social Links */}
             <div className="space-y-4">
-              <Text weight="semibold" color="default">
+              <Text weight="semibold" className="text-content-primary">
                 Connect With Us
               </Text>
               <div className="flex space-x-4">
@@ -97,7 +97,7 @@ export function Footer({ className }: FooterProps) {
                   <Link
                     key={social.name}
                     href={social.href}
-                    className="text-neutral-600 hover:text-primary transition-fast p-2 rounded-lg hover:bg-white"
+                    className="text-content-tertiary hover:text-content-brand transition-fast p-2 rounded-lg hover:bg-white hover:bg-opacity-50"
                     aria-label={social.name}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -110,11 +110,11 @@ export function Footer({ className }: FooterProps) {
           </div>
 
           {/* Bottom Bar */}
-          <div className="mt-8 pt-8 border-t border-neutral-200 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-            <Text size="sm" color="muted">
+          <div className="mt-8 pt-8 border-t border-ui-primary flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <Text size="sm" className="text-content-tertiary">
               © {currentYear} PrimeResume. All rights reserved.
             </Text>
-            <Text size="sm" color="muted">
+            <Text size="sm" className="text-content-tertiary">
               Made with ❤️ for job seekers worldwide
             </Text>
           </div>

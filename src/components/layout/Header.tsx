@@ -20,17 +20,17 @@ export function Header({ className }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className={cn('bg-white border-b border-neutral-200 sticky top-0 z-[1020]', className)}>
+    <header className={cn('bg-surface-brand border-b border-ui-brand sticky top-0 z-[1020]', className)}>
       <Container>
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-accent-500 to-accent-600 rounded-lg flex items-center justify-center">
               <Text as="span" size="sm" weight="bold" className="text-white">
                 PR
               </Text>
             </div>
-            <Text as="span" size="lg" weight="bold" color="primary">
+            <Text as="span" size="lg" weight="bold" className="text-content-inverse">
               PrimeResume
             </Text>
           </Link>
@@ -41,7 +41,7 @@ export function Header({ className }: HeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-neutral-600 hover:text-primary transition-fast font-medium"
+                className="text-content-inverse text-opacity-80 hover:text-content-inverse hover:text-opacity-100 transition-fast font-medium"
               >
                 {item.name}
               </Link>
@@ -50,17 +50,17 @@ export function Header({ className }: HeaderProps) {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="border-content-inverse border-opacity-30 text-content-inverse hover:bg-content-inverse hover:bg-opacity-10">
               Sign In
             </Button>
-            <Button size="sm">
+            <Button size="sm" className="bg-accent-600 text-white hover:bg-accent-700">
               Get Started
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-lg text-neutral-600 hover:text-primary hover:bg-neutral-50 transition-fast touch-manipulation"
+            className="md:hidden p-2 rounded-lg text-content-inverse text-opacity-80 hover:text-content-inverse hover:bg-content-inverse hover:bg-opacity-10 transition-fast touch-manipulation"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
             aria-expanded={isMobileMenuOpen}
@@ -95,7 +95,7 @@ export function Header({ className }: HeaderProps) {
         {isMobileMenuOpen && (
           <div 
             id="mobile-menu" 
-            className="md:hidden py-4 border-t border-neutral-200"
+            className="md:hidden py-4 border-t border-ui-brand border-opacity-30"
             role="navigation"
             aria-label="Mobile navigation"
           >
@@ -104,17 +104,17 @@ export function Header({ className }: HeaderProps) {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-neutral-600 hover:text-primary transition-fast font-medium px-2 py-1"
+                  className="text-content-inverse text-opacity-80 hover:text-content-inverse hover:text-opacity-100 transition-fast font-medium px-2 py-1"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="flex flex-col space-y-2 pt-4 border-t border-neutral-200">
-                <Button variant="outline" size="sm">
+              <div className="flex flex-col space-y-2 pt-4 border-t border-ui-brand border-opacity-30">
+                <Button variant="outline" size="sm" className="border-content-inverse border-opacity-30 text-content-inverse hover:bg-content-inverse hover:bg-opacity-10">
                   Sign In
                 </Button>
-                <Button size="sm">
+                <Button size="sm" className="bg-accent-600 text-white hover:bg-accent-700">
                   Get Started
                 </Button>
               </div>
