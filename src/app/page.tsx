@@ -90,30 +90,32 @@ export default function HomePage() {
                       
                       {/* Template Features */}
                       <div className="flex flex-wrap gap-1 mb-6">
-                        {template.id === 'modern' && (
-                          <>
-                            <span className="px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded-full">Professional</span>
-                            <span className="px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded-full">Skill Badges</span>
-                          </>
-                        )}
-                        {template.id === 'classic' && (
-                          <>
-                            <span className="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-full">Traditional</span>
-                            <span className="px-2 py-1 bg-neutral-100 text-neutral-700 text-xs rounded-full">Conservative</span>
-                          </>
-                        )}
-                        {template.id === 'creative' && (
-                          <>
-                            <span className="px-2 py-1 bg-accent-100 text-accent-700 text-xs rounded-full">Two-Column</span>
-                            <span className="px-2 py-1 bg-accent-100 text-accent-700 text-xs rounded-full">Progress Bars</span>
-                          </>
-                        )}
-                        {template.id === 'minimal' && (
-                          <>
-                            <span className="px-2 py-1 bg-success-100 text-success-700 text-xs rounded-full">Clean</span>
-                            <span className="px-2 py-1 bg-success-100 text-success-700 text-xs rounded-full">Spacious</span>
-                          </>
-                        )}
+                        {template.features.map((feature, index) => {
+                          // Template'e göre renk şeması
+                          const getFeatureStyle = (templateId: string) => {
+                            switch (templateId) {
+                              case 'modern':
+                                return 'bg-primary-100 text-primary-700';
+                              case 'creative':
+                                return 'bg-purple-100 text-purple-700';
+                              case 'classic':
+                                return 'bg-neutral-100 text-neutral-700';
+                              case 'minimal':
+                                return 'bg-success-100 text-success-700';
+                              default:
+                                return 'bg-neutral-100 text-neutral-700';
+                            }
+                          };
+                          
+                          return (
+                            <span 
+                              key={index}
+                              className={`px-2 py-1 text-xs rounded-full ${getFeatureStyle(template.id)}`}
+                            >
+                              {feature}
+                            </span>
+                          );
+                        })}
                       </div>
                       
                       <Button variant="secondary" className="w-full">

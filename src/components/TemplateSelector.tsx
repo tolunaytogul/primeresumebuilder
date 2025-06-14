@@ -105,30 +105,32 @@ export default function TemplateSelector() {
                     
                     {/* Template Features */}
                     <div className="mt-2 flex flex-wrap gap-1">
-                      {template.id === 'modern' && (
-                        <>
-                                        <span className="px-2 py-0.5 bg-primary-100 text-primary-700 text-xs rounded">Professional</span>
-              <span className="px-2 py-0.5 bg-primary-100 text-primary-700 text-xs rounded">Skill Badges</span>
-                        </>
-                      )}
-                      {template.id === 'classic' && (
-                        <>
-                          <span className="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">Traditional</span>
-                          <span className="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded">Conservative</span>
-                        </>
-                      )}
-                      {template.id === 'creative' && (
-                        <>
-                                        <span className="px-2 py-0.5 bg-accent-100 text-accent-700 text-xs rounded">Two-Column</span>
-              <span className="px-2 py-0.5 bg-accent-100 text-accent-700 text-xs rounded">Progress Bars</span>
-                        </>
-                      )}
-                      {template.id === 'minimal' && (
-                        <>
-                          <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded">Clean</span>
-                          <span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded">Spacious</span>
-                        </>
-                      )}
+                      {template.features.map((feature, index) => {
+                        // Renk şemasına göre dinamik stil
+                        const getFeatureStyle = (templateId: string) => {
+                          switch (templateId) {
+                            case 'modern':
+                              return 'bg-primary-100 text-primary-700';
+                            case 'creative':
+                              return 'bg-purple-100 text-purple-700';
+                            case 'classic':
+                              return 'bg-gray-100 text-gray-700';
+                            case 'minimal':
+                              return 'bg-green-100 text-green-700';
+                            default:
+                              return 'bg-gray-100 text-gray-700';
+                          }
+                        };
+                        
+                        return (
+                          <span 
+                            key={index}
+                            className={`px-2 py-0.5 text-xs rounded ${getFeatureStyle(template.id)}`}
+                          >
+                            {feature}
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
                 </button>
