@@ -20,7 +20,7 @@ export function Header({ className }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className={cn('bg-white border-b border-neutral-200 sticky top-0 z-50', className)}>
+    <header className={cn('bg-white border-b border-neutral-200 sticky top-0 z-[1020]', className)}>
       <Container>
         <div className="flex items-center justify-between h-16">
           {/* Logo */}

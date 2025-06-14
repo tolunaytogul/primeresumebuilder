@@ -55,7 +55,7 @@ export default function TemplateSelector() {
 
       {/* Template Selection Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 w-full sm:min-w-[400px] sm:w-auto">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-[1000] w-full sm:min-w-[400px] sm:w-auto">
           <div className="p-4">
             <h3 className="text-sm font-semibold text-gray-900 mb-4">Choose Template</h3>
             <div className="grid grid-cols-1 gap-3">
@@ -153,7 +153,7 @@ export default function TemplateSelector() {
       {/* Backdrop */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-40" 
+          className="fixed inset-0 z-[999]" 
           onClick={() => setIsOpen(false)}
         />
       )}
